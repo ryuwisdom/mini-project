@@ -4,101 +4,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Algorithm</title>
+
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #content {
+            /* margin: 10px; */
+            /* height: 300px; */
+            /* width: 100%; */
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
 </head>
 
 <body>
-    <!DOCTYPE html>
-    <html lang="en">
+    <div id="content">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Algorithm</title>
+    </div>
 
-        <style>
-            #content {
-                font-weight: bold;
-                color: #333;
+    <script>
+        // 문제
+        // star함수를 실행하면 매개변수에 따라 아래 실행결과와 같이
+        // Content 요소에 출력해주세요
+        // console.log로 하셔도 상관 없습니다.
 
+        const content = document.getElementById('content');
+        //1
+        // for (let i = 1; i < 10; i++) {
+
+        //     for (let j = 2; j < 10; j++) {
+
+        //         content.innerHTML += `&ensp;${j} * ${i}&ensp;=&ensp;${i*j<10 ? '&ensp;' + j*i: j*i}&nbsp&nbsp`
+        //     }
+        //     content.innerHTML += `<br>`
+
+        // }
+
+        //동현님
+        for (let i = 1; i < 10; i++) {
+
+            for (let j = 2; j < 10; j++) {
+
+                content.innerHTML += `<p style="width:100px; float:left;">${j} X ${i}=${i*j}</p>`
             }
-        </style>
-    </head>
+            content.innerHTML += '<br>'
 
-    <body>
-        <div id="content">
-
-        </div>
-
-        <script>
-            // 문제
-            // star함수를 실행하면 매개변수에 따라 아래 실행결과와 같이
-            // Content 요소에 출력해주세요
-            // console.log로 하셔도 상관 없습니다.
-
-            const content = document.getElementById('content');
-            //1
-            // for (let i = 1; i < 10; i++) {
-            //     for (let j = 2; j < 10; j++) {
-
-            //         content.innerHTML += `${j} * ${i} = ${j*i}&nbsp`
-            //     }
-            //     content.innerHTML += `<br>`
-            // }
-
-            //2
-            for (let i = 2; i < 10; i++) {
-                for (let j = 1; j < 10; j++) {
-
-                    content.innerHTML += `${i} * ${j} = ${j*i} &nbsp`
-                }
-                content.innerHTML += `<br>`
-                
-            }
+        }
 
 
-            //124356789
-            //2 * 1 =
-            //
-            //
 
-            // * 
-            //[* ][** ][***]
+        //1
+        // for (let i = 1; i < 10; i++) {
+
+        //     for (let j = 2; j < 10; j++) {
+
+        //         content.innerHTML += `&nbsp${j} * ${i}&nbsp=&nbsp${i*j<10 ? '&nbsp;' + j*i: j*i}&nbsp&nbsp`
+        //     }
+        //     content.innerHTML += `<br>`
+
+        // }
+
+        //2
+        // for (let i = 2; i < 10; i++) {
+        //     for (let j = 1; j < 10; j++) {
+
+        //         content.innerHTML += `${i} * ${j} = ${j*i} &nbsp`
+        //     }
+        //     content.innerHTML += `<br>`
+
+        // }
 
 
-            // function star(number) {
-            //     for (i = 0; 0 <= i; i++) {
-            //         return i += '*';
+        //124356789
+        //2 * 1 =
+        //
+        //
 
-            //     }
-            //     // console.log();
-            // }
+        // * 
+        //[* ][** ][***]
 
-            // * ** *** **** *****
 
-            // star(5);
+        // function star(number) {
+        //     for (i = 0; 0 <= i; i++) {
+        //         return i += '*';
 
-            // star(5); 실행 결과 
-            // *
-            // **
-            // ***
-            // ****
-            // *****
+        //     }
+        //     // console.log();
+        // }
 
-            // star(7);
+        // * ** *** **** *****
 
-            //star(7); 실행 결과
-            // *
-            // **
-            // ***
-            // ****
-            // *****
-            // ******
-            // *******
-        </script>
-    </body>
+        // star(5);
 
-    </html>
+        // star(5); 실행 결과 
+        // *
+        // **
+        // ***
+        // ****
+        // *****
+
+        // star(7);
+
+        //star(7); 실행 결과
+        // *
+        // **
+        // ***
+        // ****
+        // *****
+        // ******
+        // *******
+    </script>
+</body>
+
+</html>
 </body>
 
 </html>
