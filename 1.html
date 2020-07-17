@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Algorithm</title>
+
+        <style>
+            #content {
+                font-weight: bold;
+                color: #333;
+
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="content">
+
+        </div>
+
+        <script>
+            // 문제
+            // star함수를 실행하면 매개변수에 따라 아래 실행결과와 같이
+            // Content 요소에 출력해주세요
+            // console.log로 하셔도 상관 없습니다.
+
+            const content = document.getElementById('content');
+            //1
+            // for (let i = 1; i < 10; i++) {
+            //     for (let j = 2; j < 10; j++) {
+
+            //         content.innerHTML += `${j} * ${i} = ${j*i}&nbsp`
+            //     }
+            //     content.innerHTML += `<br>`
+            // }
+
+            //2
+            for (let i = 2; i < 10; i++) {
+                for (let j = 1; j < 10; j++) {
+
+                    content.innerHTML += `${i} * ${j} = ${j*i} &nbsp`
+                }
+                content.innerHTML += `<br>`
+                
+            }
+
+
+            //124356789
+            //2 * 1 =
+            //
+            //
+
+            // * 
+            //[* ][** ][***]
+
+
+            // function star(number) {
+            //     for (i = 0; 0 <= i; i++) {
+            //         return i += '*';
+
+            //     }
+            //     // console.log();
+            // }
+
+            // * ** *** **** *****
+
+            // star(5);
+
+            // star(5); 실행 결과 
+            // *
+            // **
+            // ***
+            // ****
+            // *****
+
+            // star(7);
+
+            //star(7); 실행 결과
+            // *
+            // **
+            // ***
+            // ****
+            // *****
+            // ******
+            // *******
+        </script>
+    </body>
+
+    </html>
+</body>
+
+</html>
