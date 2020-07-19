@@ -15,12 +15,97 @@
         const content = document.getElementById('content');
         //매개변수에 따라서 해당 구구단이 출력 
 
-        function gugudan(number) {
-            content.innerHTML = `${number}단 출력<br>dd`
-        }
+        // function gugudan(number) {
+        //     content.innerHTML = `${number}단 출력<br><br>`
+        //     for(i=1;i<10;i++){
+        //         for(j=number;j<10;j++){
+        //             content.innerHTML += `${number} X ${i} = ${number*i}<br>`
+        //         }
+        //     }
+        // }
 
-        gugudan(8);
+        // gugudan(8);
+
+        // const content = document.getElementById('content');
+
+        //첫번째 방법
+        // for(let i=0;i<5;i++){
+        //     content.innerHTML += `<br>*`
+        //     for(let j=0;j<i;j++){
+        //     content.innerHTML += `*`
+        //     }
+        // }
+
+        //두번째 방법
+        // for(let i=0;i<6;i++){
+        //     for(let j=0;j<i;j++){
+        //     content.innerHTML += `*`
+        // }
+        // content.innerHTML += `<br>`
+        // }
+        
+
+            for(let i=5,1<=i;i-=1){
+                content.innerHTML += `*`.repeat(i)
+            }
+
+
+        // for(let i=0;i<5;i++){
+        
+        //     content.innerHTML += '*'
+        //     for(let j=1; j<5;j++){
+        //     content.innerHTML += '&nbsp&nbsp+'   
+        //     }
+        //     content.innerHTML += `<br>`
+        // }
+    
+        
+
+
+        // for(let i=0;i<5;i++){
+        //     content.innerHTML += `*`
+        //     for(let j=1;j<i;j++){
+        //     content.innerHTML += `!&nbsp`
+        //     }
+        
+        // }
     </script>
 </body>
 
+<!-- 
+
+*
+**
+***
+****
+*****
+
+*****
+****
+***
+**
+*
+
+*****
+ ****
+  ***
+   **
+    *
+
+    *
+   **
+  ***
+ ****
+*****
+
+   *
+  ***
+ *****
+*******
+ *****
+  ***
+   *
+
+
+ —>
 </html>
