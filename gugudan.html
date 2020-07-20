@@ -28,13 +28,8 @@
     </div>
 
     <script>
-        // 문제
-        // star함수를 실행하면 매개변수에 따라 아래 실행결과와 같이
-        // Content 요소에 출력해주세요
-        // console.log로 하셔도 상관 없습니다.
-
         const content = document.getElementById('content');
-        //1
+        //0. 구구단(삼항연산자로 정렬) 
         // for (let i = 1; i < 10; i++) {
 
         //     for (let j = 2; j < 10; j++) {
@@ -46,29 +41,20 @@
         // }
 
 
-        // 0.
-        for(let i=1;i<10;i++) {
-            for(let j=2;j<10;j++){
+        // 1. 구구단(style로 정렬)
+        // for(let i=1;i<10;i++) {
+        //     for(let j=2;j<10;j++){
 
-            content.innerHTML +=`<p style="width:100px; float:left;">${j} * ${i} = ${i*j}&nbsp</p>`
-            }
-
-            content.innerHTML += '<br>'
-        }
-
-
-        // 1. 
-        // for (let i = 1; i < 10; i++) {
-
-        //     for (let j = 2; j < 10; j++) {
-
-        //         content.innerHTML += `&nbsp${j} * ${i}&nbsp=&nbsp${i*j<10 ? '&nbsp;' + j*i: j*i}&nbsp&nbsp`
+        //     content.innerHTML +=`<p style="width:100px; float:left;">${j} * ${i} = ${i*j}&nbsp</p>`
         //     }
-        //     content.innerHTML += `<br>`
 
+        //     content.innerHTML += '<br>'
         // }
 
-        //2 
+
+
+
+        // 2. 구구단 기본
         // for (let i = 2; i < 10; i++) {
         //     for (let j = 1; j < 10; j++) {
 
@@ -78,28 +64,18 @@
 
         // }
 
+        // 3. 매개변수에 따라서 해당 구구단이 출력 
 
+        // function gugudan(number) {
+        //     content.innerHTML = `${number}단 출력<br><br>`
+        //     for(i=1;i<10;i++){
+        //         for(j=number;j<10;j++){
+        //             content.innerHTML += `${number} X ${i} = ${number*i}<br>`
+        //         }
+        //     }
+        // }
 
-    
-        // star(5);
-
-        // star(5); 실행 결과 
-        // *
-        // **
-        // ***
-        // ****
-        // *****
-
-        // star(7);
-
-        //star(7); 실행 결과
-        // *
-        // **
-        // ***
-        // ****
-        // *****
-        // ******
-        // *******
+        // gugudan(8);
     </script>
 </body>
 

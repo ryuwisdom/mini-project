@@ -13,22 +13,11 @@
     </div>
     <script>
         const content = document.getElementById('content');
-        //매개변수에 따라서 해당 구구단이 출력 
 
-        // function gugudan(number) {
-        //     content.innerHTML = `${number}단 출력<br><br>`
-        //     for(i=1;i<10;i++){
-        //         for(j=number;j<10;j++){
-        //             content.innerHTML += `${number} X ${i} = ${number*i}<br>`
-        //         }
-        //     }
-        // }
-
-        // gugudan(8);
 
         // const content = document.getElementById('content');
 
-        //첫번째 방법
+        //첫번째 별 - 첫번째 방법
         // for(let i=0;i<5;i++){
         //     content.innerHTML += `<br>*`
         //     for(let j=0;j<i;j++){
@@ -36,30 +25,30 @@
         //     }
         // }
 
-        //두번째 방법
+        //첫번째 별 - 두번째 방법
         // for(let i=0;i<6;i++){
         //     for(let j=0;j<i;j++){
         //     content.innerHTML += `*`
         // }
         // content.innerHTML += `<br>`
         // }
-        
 
-            for(let i=5,1<=i;i-=1){
-                content.innerHTML += `*`.repeat(i)
-            }
+
+        // for(let i=5,1<=i;i-=1){
+        //     content.innerHTML += `*`.repeat(i)
+        // }
 
 
         // for(let i=0;i<5;i++){
-        
+
         //     content.innerHTML += '*'
         //     for(let j=1; j<5;j++){
         //     content.innerHTML += '&nbsp&nbsp+'   
         //     }
         //     content.innerHTML += `<br>`
         // }
-    
-        
+
+
 
 
         // for(let i=0;i<5;i++){
@@ -67,8 +56,44 @@
         //     for(let j=1;j<i;j++){
         //     content.innerHTML += `!&nbsp`
         //     }
-        
+
         // }
+
+        // 문제
+        // star함수를 실행하면 매개변수에 따라 아래 실행결과와 같이
+        // Content 요소에 출력해주세요
+        // console.log로 하셔도 상관 없습니다.
+
+        function star(number) {
+
+            for (let i = 0; i < number; i++) {
+                for (let j = 0; j < i; j++) {
+                    content.innerHTML += `*`
+                }
+                content.innerHTML += `<br>`
+            }
+        }
+
+
+        star(5);
+
+        // star(5); 실행 결과 
+        // *
+        // **
+        // ***
+        // ****
+        // *****
+
+        // star(7);
+
+        //star(7); 실행 결과
+        // *
+        // **
+        // ***
+        // ****
+        // *****
+        // ******
+        // *******
     </script>
 </body>
 
