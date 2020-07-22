@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Show!</title>
+    <style>
+        body{
+            background-color: lavender;
+        }
+        .container {
+            padding: 7px;
+            background-color: #fff;
+        }
+        #content {
+            margin: 0;
+            width: 0;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        <input type="text" id="insert">
+        <div id="content">
+        
+        </div>
+
+    </div>
+    <script>
+        const insertNum = document.getElementById("insert")
+        insertNum.addEventListener("input",function(e){
+            // console.log(this.value);
+
+            content.innerHTML = ' ';
+            const userInput = this.value;
+
+            star1(userInput);
+            content.innerHTML +='<br>'
+            star2(userInput);
+            content.innerHTML +='<br>'
+            star3(userInput);
+            content.innerHTML +='<br>'
+            star4(userInput);
+            content.innerHTML +='<br>'
+            star5(userInput);
+        }) 
+
+        const content = document.querySelector("#content")
+        const space = '<span style="color:white">*</span>'
+
+        function star1(printNum) {
+            for (let i = 0; i < printNum; i++) {
+                for (let j = 0; j <= i; j++) {
+                    content.innerHTML += '*'
+                }
+                content.innerHTML += '<br>'
+            }
+        }
+
+
+        function star2(printNum) {
+            for (let i = 0; i < printNum; i++) {
+
+                for (let j = printNum - i; j > 0; j--) {
+                    content.innerHTML += '*'
+                }
+                content.innerHTML += '<br>'
+            }
+        }
+
+        function star3(printNum) {
+            for (let i = 0; i < printNum; i++) {
+
+                for (let j = printNum - i; j > 1; j--) {
+                    content.innerHTML += space
+                }
+                for (let j = 0; j <= i; j++) {
+                    content.innerHTML += '*'
+                }
+                content.innerHTML += '<br>'
+            }
+        }
+
+
+
+        // ******
+        //  *****
+        //   ****
+        //    ***
+        //     **
+        //      *
+
+        function star4(printNum) {
+
+            for (let i = 0; i < printNum; i++) {
+
+                for (let j = printNum - i; j < printNum; j++) {
+
+                    content.innerHTML += space
+                }
+
+                for (let j = printNum - i; j > 0; j--) {
+
+                    content.innerHTML += '*'
+                }
+                content.innerHTML += '<br>'
+            }
+        }
+
+
+        function star5(printNum) {
+
+
+            const first = Math.floor(printNum / 2) + 1;
+            const second = Math.floor(printNum / 2);
+
+
+            for (let i = 0; i < first; i++) {
+                for (let j = 0; j < first - 1 - i; j++) {
+                    content.innerHTML += space
+                }
+                for (let j = 0; j < i * 2 + 1; j++) {
+                    content.innerHTML += '*'
+                }
+                content.innerHTML += '<br>'
+            }
+            for (let i = 0; i < second; i++) {
+                for (let j = 0; j <= i; j++) {
+                    content.innerHTML += space
+                }
+                for (let j = printNum - i * 2; j - 2 > 0; j--) {
+                    content.innerHTML += '*'
+                }
+                content.innerHTML += '<br>'
+            }
+        }
+ 
+    </script>
+</body>
+
+</html>

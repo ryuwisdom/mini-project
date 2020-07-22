@@ -13,12 +13,13 @@
     </div>
     <script>
         const content = document.getElementById('content');
-        const space = '<span style="color:white">*</span>'
+        const space = '<span style="color:pink">*</span>'
         // *
         // **
         // ***
         // ****
         // *****
+        // ******
 
         // 1. - way of first
         // for (let i = 0; i < 6; i++) {
@@ -35,6 +36,9 @@
         //     }
         //     content.innerHTML += `<br>`
         // }
+
+     
+
 
         // ******
         // *****
@@ -68,7 +72,7 @@
         //     }
         //     for (let j = 6 - i; j > 0; j--) {
 
-        //         content.innerHTML += "*"
+        //         content.innerHTML += j
         //     }
         //     content.innerHTML += `<br>`
         // }
@@ -103,51 +107,98 @@
 
         // 5.
 
-        for (let i = 0; i < 3; i++) {
-
-
-            for (let j = 0; j < 2 - i; j++) {
-                content.innerHTML += space
-            }
-
-            for (let k = 0; k < i * 2 + 1; k++) {
-                content.innerHTML += k
-
-            }
-
-            content.innerHTML += '<br>'
-        }
-
-        for (let i = 0; i < 2; i++) {
-            for (let j = 0; j <= i; j++) {
-                content.innerHTML += space
-            }
-
-            for (let j = 3 - i * 2; j > 0; j--) {
-                content.innerHTML += j
-            }
-            content.innerHTML += '<br>'
-        }
-
-
-        // for (let i = 0; i < 7; i += 2) {
-
-
-
-        //     for (let j = 0; j <= i; j += 1) {
-        //         content.innerHTML += j
-        //     }
-        //     content.innerHTML += "<br>"
-        // }
         // for (let i = 0; i < 3; i++) {
-        //     for (let k = 3 - i; k > 0; k--) {
-        //         content.innerHTML += '+'
+
+
+        //     for (let j = 0; j < 2 - i; j++) {
+        //         content.innerHTML += space
         //     }
-        //     for (let j = 5 - (i * 2); j > 0; j--) {
+
+        //     for (let k = 0; k < i * 2 + 1; k++) {
+        //         content.innerHTML += k
+
+        //     }
+
+        //     content.innerHTML += '<br>'
+        // }
+
+        // for (let i = 0; i < 2; i++) {
+        //     for (let j = 0; j <= i; j++) {
+        //         content.innerHTML += space
+        //     }
+
+        //     for (let j = 3 - i * 2; j > 0; j--) {
         //         content.innerHTML += j
         //     }
-        //     content.innerHTML += "<br>"
+        //     content.innerHTML += '<br>'
         // }
+
+        // for(let i =0;i<13;i++){
+        //     for(let k=0;k<12-i;k++){
+        //         content.innerHTML += space
+        //     }
+        //     for(j=0;j<i*2+1;j++){
+        //         content.innerHTML += '*'
+        //     }
+        //     content.innerHTML += '<br>'
+        // }
+        // for(let i =0;i<12;i++){
+        //     for(let k=0;k<=i;k++){
+        //         content.innerHTML += space
+        //     }
+        //     for(let j=23-i*2;j>0;j--){
+        //         content.innerHTML += '*'
+        //     }
+        //     content.innerHTML += '<br>'
+        // }
+
+        // for(let i =0;i<5;i++){
+        //     for(let k = 0;k<4-i;k++){
+        //         content.innerHTML += space
+        //     }
+        //     for(let j =0;j<i*2+1;j++){
+        //         content.innerHTML += j
+        //     }
+        //     content.innerHTML += '<br>'
+        // }
+        // for(let i=0;i<4;i++){
+        //     for(let k = 0;k<=i;k++){
+        //         content.innerHTML += space
+        //     }
+        //     for(let j =7-i*2;j>0;j--){
+        //         content.innerHTML += j
+        //     }
+        //     content.innerHTML += '<br>'
+        //     }
+
+
+
+
+
+
+        // for (let i = 0; i < 8; i++) {
+        //     for (let j = 7 - i; j > 0; j--) {
+        //         content.innerHTML += space
+        //     }
+        //     for (let j = 0; j < i * 2 + 1; j++) {
+        //         content.innerHTML += '*'
+        //     }
+        //     content.innerHTML += '<br>'
+        // }
+        // for (let i = 0; i < 7; i++) {
+        //     for (let j = 0; j <= i; j++) {
+        //         content.innerHTML += space
+        //     }
+        //     for (let j = 0; j < 13-i*2; j++) {
+        //         content.innerHTML += '*'
+        //     }
+            // for (let j = 13 - i * 2; j > 0; j--) {
+            //     content.innerHTML += j
+            // }
+        //     content.innerHTML += '<br>'
+        // }
+
+        
 
 
         // 문제
