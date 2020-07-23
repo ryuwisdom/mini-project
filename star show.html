@@ -5,34 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Star Show!</title>
-    <style>
-        body{
-            background-color: lavender;
-        }
-        .container {
-            padding: 7px;
-            background-color: #fff;
-        }
-        #content {
-            margin: 0;
-            width: 0;
-        }
-    </style>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet"> -->
+    <link rel="stylesheet" href="./star.css">
 </head>
-
 
 <body>
     <div class="container">
-        <input type="text" id="insert">
-        <div id="content">
-        
+        <div class="top">
+            <img src="./image/star.jpg" class="star1" alt="star1">
+            <img src="./image/star.jpg" class="star2" alt="star2">
+            <img src="./image/star.jpg" class="star3" alt="star3">
+            <h1>Star Printer <small>with JavaScript</small></h1>
+            <input type="text" id="insert" placeholder="Please enter a number">
+            <button id="code">My code</button>
         </div>
+        <div id="content"></div>
+      
 
     </div>
     <script>
         const insertNum = document.getElementById("insert")
         insertNum.addEventListener("input",function(e){
             // console.log(this.value);
+            // console.log(e);
 
             content.innerHTML = ' ';
             const userInput = this.value;
@@ -47,6 +42,11 @@
             content.innerHTML +='<br>'
             star5(userInput);
         }) 
+
+        const mycode = document.getElementById("code")
+        mycode.addEventListener("click",()=>{
+            // console.log(this);
+        })
 
         const content = document.querySelector("#content")
         const space = '<span style="color:white">*</span>'
@@ -85,14 +85,6 @@
         }
 
 
-
-        // ******
-        //  *****
-        //   ****
-        //    ***
-        //     **
-        //      *
-
         function star4(printNum) {
 
             for (let i = 0; i < printNum; i++) {
@@ -112,7 +104,12 @@
 
 
         function star5(printNum) {
-
+            // if(printNum == null) {
+            //     return;
+            // }
+            if(printNum == 0) {
+                return;
+            }
 
             const first = Math.floor(printNum / 2) + 1;
             const second = Math.floor(printNum / 2);
@@ -137,8 +134,7 @@
                 content.innerHTML += '<br>'
             }
         }
- 
-    </script>
+     </script>
 </body>
 
 </html>
