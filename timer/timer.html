@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        background: lemonchiffon;
+        height: 100vh;
+    }
+
+    .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        padding: 0px 10px;
+        margin: 60px 6px;
+    }
+
+    .time {
+        background: darkturquoise;
+        height: 100px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="time">
+            <span class="hour">00</span>:<span class="min">00</span>:<span class="sec">00</span>
+
+        </div>
+
+        <div class="btn">
+            <button id="start">start</button>
+            <button id="stop">stop</button>
+            <button>reset</button>
+        </div>
+    </div>
+
+    <script>
+        const startbtn = document.getElementById("start")
+        const stopbtn = document.getElementById("stop")
+        const sec = document.getElementsByClassName("sec")[0]
+        const min = document.getElementsByClassName("min")[0]
+        const hour = document.getElementsByClassName("hour")[0]
+        let seconds = 0;
+        let minutes = 0;
+        let intervalId = 0
+
+
+
+        function start() {
+            intervalId = setInterval(function () {
+                if (seconds < 9) {
+                    sec.innerHTML = `<p>0${++seconds}</p>`
+
+                } else {
+                    sec.innerHTML = `<p>${++seconds}</p>`
+                }
+                if (seconds == 60) {
+
+
+                    // min.innerHTML = `<p>0${++minutes}</p>`
+
+                    if (minutes >= 9) {
+                        min.innerHTML = `<p>${++minutes}</p>`
+                    } else {
+                        min.innerHTML = `<p>0${++minutes}</p>`
+
+                    }
+
+
+                    seconds = 0
+
+
+                }
+
+            }, 10);
+        }
+
+
+        function stop() {
+            clearInterval(intervalId)
+        }
+
+        stopbtn.addEventListener("click", stop)
+        startbtn.addEventListener("click", start)
+    </script>
+</body>
+
+</html>
