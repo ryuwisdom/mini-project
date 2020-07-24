@@ -49,23 +49,35 @@
         <div class="btn">
             <button id="start">start</button>
             <button id="stop">stop</button>
-            <button>reset</button>
+            <button id="reset">reset</button>
         </div>
     </div>
 
     <script>
         const startbtn = document.getElementById("start")
         const stopbtn = document.getElementById("stop")
+        const resetbtn = document.getElementById("reset")
         const sec = document.getElementsByClassName("sec")[0]
         const min = document.getElementsByClassName("min")[0]
         const hour = document.getElementsByClassName("hour")[0]
         let seconds = 0;
         let minutes = 0;
-        let intervalId = 0
+        let hours = 0;
+        let intervalId = 0;
+        let timeReset = 0;
+        let stopState = true;
+
+
 
 
 
         function start() {
+            if(stopState == false){
+                return
+            }
+
+            stopState = false;
+
             intervalId = setInterval(function () {
                 if (seconds < 9) {
                     sec.innerHTML = `<p>0${++seconds}</p>`
@@ -73,8 +85,9 @@
                 } else {
                     sec.innerHTML = `<p>${++seconds}</p>`
                 }
-                if (seconds == 60) {
 
+
+                if (seconds == 59) {
 
                     // min.innerHTML = `<p>0${++minutes}</p>`
 
@@ -84,23 +97,49 @@
                         min.innerHTML = `<p>0${++minutes}</p>`
 
                     }
-
-
                     seconds = 0
 
 
                 }
+                if (minutes == 59) {
 
-            }, 10);
+                    if (hours >= 9) {
+                        hour.innerHTML = `<p>${++hours}</p>`
+                    } else {
+                        hour.innerHTML = `<p>0${++hours}</p>`
+                    }
+
+                    minutes = 0
+
+                }
+
+            }, 1000);
         }
 
 
         function stop() {
+
+            stopState = true;
             clearInterval(intervalId)
         }
 
+        function reset() {
+            if (stopState == true) {
+                seconds = 0
+                minutes = 0
+                hours = 0
+                sec.innerHTML = `<p>00</p>`
+                min.innerHTML = `<p>00</p>`
+                hour.innerHTML = `<p>00</p>`
+            }
+
+        }
+
+
+
         stopbtn.addEventListener("click", stop)
         startbtn.addEventListener("click", start)
+        resetbtn.addEventListener("click", reset)
     </script>
 </body>
 
