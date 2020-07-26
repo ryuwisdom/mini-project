@@ -4,52 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timer</title>
+    <title>Stop Watch</title>
+    <link rel="stylesheet" href="stopwatch.css">
 </head>
 
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-    }
-
-    .container {
-        background: lemonchiffon;
-        height: 100vh;
-    }
-
-    .btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    button {
-        padding: 0px 10px;
-        margin: 60px 6px;
-    }
-
-    .time {
-        background: darkturquoise;
-        height: 100px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
 
 <body>
     <div class="container">
+        <div class="img">
+            <img src="ears.png" alt="cat">
+        </div>
         <div class="time">
             <span class="hour">00</span>:<span class="min">00</span>:<span class="sec">00</span>
 
         </div>
 
         <div class="btn">
-            <button id="start">start</button>
-            <button id="stop">stop</button>
-            <button id="reset">reset</button>
+            <div class="btn-set">
+                <button id="start">start</button>
+                <button id="stop">stop</button>
+                <button id="reset">reset</button>
+            </div>
         </div>
     </div>
 
