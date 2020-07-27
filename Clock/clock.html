@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <link rel="stylesheet" href="clock.css">
+</head>
+<body>
+    <div class="container">
+
+        <span id="hour"></span> <p>:</p><span id="minute"></span><p>:</p><span id="seconds"></span> <span id="am"></span>
+    </div>
+</body>
+<script>
+
+
+    // 시계만들기
+
+    // HTML
+    // 시/분/초 입력될 공간 작성
+
+    // Script
+    // 실행함수는 바로 실행(addeventlistener 사용안해도 된다)
+    // 실행함수에 date()메소드를 사용(현재 시간을 불어오기 위함)
+    // date()메소드 값을 기준으로 시간/분/초 값을 추출
+    // setInterval()메소드를 사용해 (1초마다) 현재시간을 불러온다
+    //  업데이트가 된 값을 출력한다.
+    // PM,AM = if문 사용하여 시간의 숫자가 13초과로 출력될 시 PM 아니라면 AM
+
+    const Hour = document.querySelector("#hour")
+    const Min = document.querySelector("#minute")
+    const Sec = document.querySelector("#seconds")
+    const DayorNot = document.querySelector("#am")
+    
+
+    function Now () {
+        setInterval(function(){
+            const today = new Date();
+            if(Now){
+
+            Hour.innerHTML = `${today.getHours() <10 ? "0"+today.getHours() : today.getHours()} `
+            Min.innerHTML = `${today.getMinutes() <10 ? "0"+today.getMinutes() : today.getMinutes()}`
+            Sec.innerHTML = `${today.getSeconds() <10 ? "0"+today.getSeconds() : today.getSeconds()} `
+            DayorNot.innerHTML = `${today.getHours() <13 ? "&nbsp;AM" : "&nbsp;PM"} `   
+
+            }
+            // else{
+
+            // Hour.innerHTML = today.getHours();
+            // Min.innerHTML = today.getMinutes();
+            // Sec.innerHTML = today.getSeconds();
+
+            // }
+
+
+
+
+            
+
+
+
+        },1000)
+    }
+    Now();
+
+    
+
+
+
+
+</script>
+</html>
