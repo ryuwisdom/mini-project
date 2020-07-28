@@ -9,7 +9,7 @@
 <body>
     <div class="container">
 
-        <span id="hour"></span> <p>:</p><span id="minute"></span><p>:</p><span id="seconds"></span> <span id="am"></span>
+        <span id="hour" class="glow"></span> <p class="glow">:</p><span id="minute" class="glow"></span><p class="glow">:</p><span id="seconds" class="glow"></span><span id="am" class="glow"></span>
     </div>
 </body>
 <script>
@@ -37,14 +37,18 @@
     function Now () {
         setInterval(function(){
             const today = new Date();
-            if(Now){
 
-            Hour.innerHTML = `${today.getHours() <10 ? "0"+today.getHours() : today.getHours()} `
-            Min.innerHTML = `${today.getMinutes() <10 ? "0"+today.getMinutes() : today.getMinutes()}`
-            Sec.innerHTML = `${today.getSeconds() <10 ? "0"+today.getSeconds() : today.getSeconds()} `
-            DayorNot.innerHTML = `${today.getHours() <13 ? "&nbsp;AM" : "&nbsp;PM"} `   
+            const H = today.getHours()
+            const M = today.getMinutes()
+            const S = today.getSeconds()
+     
 
-            }
+            Hour.innerHTML = `${H <10 ? "0"+H : H} `
+            Min.innerHTML = `${M <10 ? "0"+M : M}`
+            Sec.innerHTML = `${S <10 ? "0"+S : S} `
+            DayorNot.innerHTML = `${H <12 ? "&nbsp;AM" : "&nbsp;PM"} `   
+
+            
             // else{
 
             // Hour.innerHTML = today.getHours();

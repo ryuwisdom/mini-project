@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Grade</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .result { height: 700px;
+                  width: 700px;
+                  background: seashell;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+
+        }
+        .main {
+                  height: 600px;
+                  width: 600px;
+                  background: lavender;
+                  /* margin: 0 auto; */
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+
+        }
+
+        .main-top {
+            height: 100px;
+            border: 1px solid green;
+            top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="result">
+        <div class="main">
+            <div class="main-top">
+
+                <label>Grade Converter</label>
+                <input id="writeScore" type="text">
+                <button id="summit">Summit</button>
+                <h1 id="result"></h1>
+
+
+            </div>
+
+
+        </div>
+
+        <!-- <p>Ref.<br>90 ~ 100 = A<br> 80 ~ 89 = B <br> 70 ~ 79 = C<br> 60 ~ 69 = D<br> Else = F</p> -->
+    <!-- 성적별로 이모지 삽입  -->
+    </div>
+
+    <!-- 동현님 code -->
+    <!-- <input type="text" placeholder="시험 점수" id="scoreInput">
+    <button onclick="calculateScore()">Click</button>
+    <div id="resultDisplay" style="font-size: 200px;"></div> -->
+
+
+    <script>
+
+        //인풋창에 점수를 입력하고 버튼을 눌렀을때
+        //입력한 점수와                         
+        //시험점수 조건을 비교한 후 성적이 출력된다.
+
+        const summitBtn = document.querySelector("#summit")
+        const testGrade = document.querySelector("#result")
+
+        function getgrade() {
+            if (90 <= score) {
+                testGrade.innerHTML = 'A  😆'
+            } else if (80 <= score) {
+                testGrade.innerHTML = 'B  😉'
+            } else if (70 <= score) {
+                testGrade.innerHTML = 'C  😙'
+            } else if (60 <= score) {
+                testGrade.innerHTML = 'D  😶'
+            } else {
+                testGrade.innerHTML = 'F  😥'
+            }
+        }
+
+        function result() {
+            const insertGrade = document.querySelector("#writeScore").value;
+            score = insertGrade;
+            getgrade()
+
+        }
+
+        summitBtn.addEventListener("click", result)
+
+        // 동현님 code
+        // const scoreInput = document.querySelector('#scoreInput');
+        // const resultDisplay = document.querySelector('#resultDisplay');
+        // const arr = ['F', 'F', 'F', 'F', 'F', 'F', 'D', 'C', 'B', 'A', 'A']
+        // //            0    1    2    3    4    5    6    7    8    9   10
+
+        // function calculateScore() {
+        //     resultDisplay.innerHTML = arr[(scoreInput.value / 10) | 0];
+        // }
+
+
+        
+    </script>
+</body>
+
+</html>

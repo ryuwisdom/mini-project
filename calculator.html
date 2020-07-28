@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            height: 10px;
+            width: 10px;
+            padding: 6px;
+            text-align: center;
+        }
+
+        table {
+            border-spacing: 15px;
+
+        }
+
+        .result {
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="table-part">
+                <table style="width:100%">
+                    <tr>
+                        <td colspan="4" class="result-window">
+                            <p class="cal"></p>
+                            <p class="result"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key plus">+</td>
+                        <td class="key minus">-</td>
+                        <td class="key multiplied">*</td>
+                        <td class="key divided">/</td>
+                    </tr>
+                    <tr>
+                        <td class="key 7">7</td>
+                        <td class="key 8">8</td>
+                        <td class="key 9">9</td>
+                        <td rowspan="4" class="key submit">=</td>
+                    </tr>
+                    <tr>
+                        <td class="key 4">4</td>
+                        <td class="key 5">5</td>
+                        <td class="key 6">6</td>
+                    </tr>
+                    <tr>
+                        <td class="key 1">1</td>
+                        <td class="key 2">2</td>
+                        <td class="key 3">3</td>
+                    </tr>
+                    <tr>
+                        <td class="key 0">0</td>
+                        <td class="key dot">.</td>
+                        <td class="key C">C</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 계산기 만들기
+        // 0. 각 key에 식별자 지정
+        // 1. 결과창에 각 key가 입력되도록 하기
+        //    1-1) 키를 눌었을때 결과창에 키의 값을 불어온다.
+
+
+        // 2. '='버튼을 누르면 '='도 입력된 후 계산식 공간의 계산식이 계산된 후 
+        //     계산 결과 공간에 값이 출력된다.
+        // 4. 'C'버튼을 누르면 결과창 초기화
+        // 5. 처 시작시 연산자를 클릭하면   (연산자, 소수점)
+        //     5-1)
+
+
+        const calSpace = document.querySelector(".cal")
+        const resultSpace = document.querySelector(".result")
+        const submitBtn = document.querySelector(".submit")
+        const KEY = document.querySelectorAll("td")
+        const C = document.querySelector(".C")
+        const Operator = document.querySelector(".submit,.plus, .minus, .multiplied, .devided, .dot")
+
+
+        // const star = document.querySelector(".multiplied")
+        // star.addEventListener("click",function(){
+        //     console.log(star.innerText);
+        // })
+
+        // 결과창이 공백일때 연산자 입력 방지
+        
+
+        // 연산자가 입력되었을때 연산자를 이어서 클릭하면 공백
+        // if (calSpace.innerHTML.slice(-1) == "*") {
+        //             }
+
+        //condition/ roop for /dom event, dom listener
+
+
+        function Calculate() {
+
+        
+                if (calSpace.innerHTML == "" && (KEY[i].innerText == "*" | KEY[i].innerText == "/" | KEY[i]
+                        .innerText == "+" | KEY[i]
+                        .innerText == "-" | KEY[i].innerText == "." | KEY[i].innerText == "=" ) 
+                        | (calSpace.innerHTML !=="" && calSpace.innerHTML.slice(-1) =="*")) {
+                        } else {
+                    calSpace.innerHTML += event.target.innerText
+                        }
+                  
+        }
+
+
+
+
+
+            // if (calSpace.innerText == "") {
+                // console.log(calSpace.innerHTML);
+                // if(calSpace.innerHTML == "*"){
+                // }
+            // } else {
+                // calSpace.innerHTML += event.target.innerText;
+            // }
+
+            // calSpace.innerHTML += event.target.innerText;
+        // }
+
+        function getResult() {
+            if (calSpace.innerText == "") {
+
+            } else {
+
+                resultSpace.innerHTML = eval(calSpace.innerHTML.slice(0, resultSpace.innerHTML.length -1))
+            }
+            
+        }
+
+        function cancel() {
+            calSpace.innerHTML = " "
+            resultSpace.innerHTML = " "
+        }
+
+
+        for (let i = 0; i < 17; i++) {
+            KEY[i].addEventListener("click", Calculate)
+        }
+        submitBtn.addEventListener("click", getResult)
+
+        C.addEventListener("click", cancel)
+    </script>
+</body>
+
+</html>
