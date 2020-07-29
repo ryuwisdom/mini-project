@@ -31,7 +31,7 @@
     <div class="container">
         <div class="main">
             <div class="table-part">
-                <table style="width:100%">
+                <table style="width:100%" id="outer">
                     <tr>
                         <td colspan="4" class="result-window">
                             <p class="cal"></p>
@@ -75,13 +75,11 @@
         // 0. 각 key에 식별자 지정
         // 1. 결과창에 각 key가 입력되도록 하기
         //    1-1) 키를 눌었을때 결과창에 키의 값을 불어온다.
-
-
         // 2. '='버튼을 누르면 '='도 입력된 후 계산식 공간의 계산식이 계산된 후 
         //     계산 결과 공간에 값이 출력된다.
-        // 4. 'C'버튼을 누르면 결과창 초기화
-        // 5. 처 시작시 연산자를 클릭하면   (연산자, 소수점)
-        //     5-1)
+        // 3. 'C'버튼을 누르면 결과창 초기화
+        // 4.  시작시(결과창이 공백일때) 연산자를 클릭하면(연산자, 소수점) 출력되지 않는다.
+        // 5.  연산자가 중복으로 이어서 입력될 시 연산자가 출력되지 않는다. 
 
 
         const calSpace = document.querySelector(".cal")
@@ -91,72 +89,151 @@
         const C = document.querySelector(".C")
         const Operator = document.querySelector(".submit,.plus, .minus, .multiplied, .devided, .dot")
 
+        const Outline = document.querySelector("#outer")
+        // const Cal = calSpace.innerText
 
-        // const star = document.querySelector(".multiplied")
-        // star.addEventListener("click",function(){
-        //     console.log(star.innerText);
-        // })
+        //드래그 & 테이블 클릭시 버그 확인 -> 이후 grid로 작성 설계예정
+        Outline.addEventListener('mouseup', function (e) {
 
-        // 결과창이 공백일때 연산자 입력 방지
-        
-
-        // 연산자가 입력되었을때 연산자를 이어서 클릭하면 공백
-        // if (calSpace.innerHTML.slice(-1) == "*") {
-        //             }
-
-        //condition/ roop for /dom event, dom listener
-
-
-        function Calculate() {
-
-        
-                if (calSpace.innerHTML == "" && (KEY[i].innerText == "*" | KEY[i].innerText == "/" | KEY[i]
-                        .innerText == "+" | KEY[i]
-                        .innerText == "-" | KEY[i].innerText == "." | KEY[i].innerText == "=" ) 
-                        | (calSpace.innerHTML !=="" && calSpace.innerHTML.slice(-1) =="*")) {
-                        } else {
-                    calSpace.innerHTML += event.target.innerText
-                        }
-                  
-        }
-
-
-
-
-
-            // if (calSpace.innerText == "") {
-                // console.log(calSpace.innerHTML);
-                // if(calSpace.innerHTML == "*"){
-                // }
-            // } else {
-                // calSpace.innerHTML += event.target.innerText;
-            // }
-
-            // calSpace.innerHTML += event.target.innerText;
-        // }
-
-        function getResult() {
-            if (calSpace.innerText == "") {
-
-            } else {
-
-                resultSpace.innerHTML = eval(calSpace.innerHTML.slice(0, resultSpace.innerHTML.length -1))
+            if (calSpace.innerText == "" && (e.target.innerText == "+" | e.target.innerText == "-" | e.target
+                    .innerText == "*" | e.target.innerText == "/" | e.target.innerText == "." | e.target
+                    .innerText == "=")) {
+                return
             }
+
+            if (e.target.innerText == "C") {
+                calSpace.innerHTML = ""
+                resultSpace.innerHTML = ""
+
+                return;
+                //return이후에 함수 완전 종료
+            }
+
+            if(resultSpace.innerText !==""){
+                calSpace.innerText = ""
+                resultSpace.innerText =""
+            }
+
+            if (calSpace.innerText == "" && (e.target.innerText == "+" | e.target.innerText == "-" | e.target
+                    .innerText == "*" | e.target.innerText == "/" | e.target.innerText == "." | e.target
+                    .innerText == "=")) {
+
+                return
+            }
+
+   
+            if(calSpace.innerText.indexOf(".") !==-1 && e.target.innerText == "."){
+                return
+            }
+
+         
+
+            calSpace.innerText += e.target.innerText
+            // console.log(calSpace.innerText.slice(-1));
+            if(calSpace.innerText.slice(0,1) == "0" && calSpace.innerText.slice(1,2) =="0"){
+                calSpace.innerText = calSpace.innerText.slice(0,1)}
+                // console.log(e.target.innerText.slice(-1, calSpace.innerText.length));
+
+
+            // 첫번째 문자열 자리가 0 이후
+            // 두번째 자리가 숫자인 경우, 두번째부터 출력
+            // 
+            // 단 연산자도 출력제외(연산자가 올 시 함수시행 안함 )
+
+
+                // 아래 - 두번째 자리가 숫자인 조건 대신 연산자가 아닌 조건으로 줄 수 있다. 
+            if((calSpace.innerText.slice(0,1) == "0") && (calSpace.innerText.slice(1,2) == "1"|
+            calSpace.innerText.slice(1,2) == "2"| 
+            calSpace.innerText.slice(1,2) == "3"|
+            calSpace.innerText.slice(1,2) == "4"|
+            calSpace.innerText.slice(1,2) == "5"|
+            calSpace.innerText.slice(1,2) == "6"|
+            calSpace.innerText.slice(1,2) == "7"|
+            calSpace.innerText.slice(1,2) == "8"|
+            calSpace.innerText.slice(1,2) == "9"
+            )){
+                calSpace.innerText = calSpace.innerText.slice(1)
+                // console.log("+_+");
+            }
+                
+            // if(
+            // (e.target.innerText.slice(-1, calSpace.innerText.length) == "+" |
+            //  e.target.innerText.slice(-1, calSpace.innerText.length) == "-" |
+            //  e.target.innerText.slice(-1, calSpace.innerText.length) == "*" |
+            //  e.target.innerText.slice(-1, calSpace.innerText.length) == "/" |
+            //  e.target.innerText.slice(-1, calSpace.innerText.length) == "." |
+            //  e.target.innerText.slice(-1, calSpace.innerText.length) == "=" )){
+            //     calSpace.innerText = calSpace.innerText.slice(1)
+            //         console.log("+_+");
+            //     }
+
+
+            // if((calSpace.innerText.slice(0,1) =="0") &&
+            //     (calSpace.innerText.slice(-1, calSpace.innerText.length) !== "+" |
+            //  calSpace.innerText.slice(-1, calSpace.innerText.length) !== "-" |
+            //  calSpace.innerText.slice(-1, calSpace.innerText.length) !== "*" |
+            //  calSpace.innerText.slice(-1, calSpace.innerText.length) !== "/" |
+            //  calSpace.innerText.slice(-1, calSpace.innerText.length) !== "." |
+            //  calSpace.innerText.slice(-1, calSpace.innerText.length) !== "="))  {
+            //      calSpace.innerText = calSpace.innerText.slice(1)
+            //     //  console.log(calSpace.innerText.slice(1,calSpace.innerText.length));
+            //  }
             
-        }
-
-        function cancel() {
-            calSpace.innerHTML = " "
-            resultSpace.innerHTML = " "
-        }
 
 
-        for (let i = 0; i < 17; i++) {
-            KEY[i].addEventListener("click", Calculate)
-        }
-        submitBtn.addEventListener("click", getResult)
 
-        C.addEventListener("click", cancel)
+            if ((calSpace.innerText.slice(-2, calSpace.innerText.length-1)==="+"|
+            calSpace.innerText.slice(-2, calSpace.innerText.length-1)=="-"|
+            calSpace.innerText.slice(-2, calSpace.innerText.length-1)=="*"|
+            calSpace.innerText.slice(-2, calSpace.innerText.length-1)=="/"|
+            calSpace.innerText.slice(-2, calSpace.innerText.length-1)=="."|
+            calSpace.innerText.slice(-2, calSpace.innerText.length-1)=="=")
+            &&
+            (calSpace.innerText.slice(-1, calSpace.innerText.length) == "+" |
+             calSpace.innerText.slice(-1, calSpace.innerText.length) == "-" |
+             calSpace.innerText.slice(-1, calSpace.innerText.length) == "*" |
+             calSpace.innerText.slice(-1, calSpace.innerText.length) == "/" |
+             calSpace.innerText.slice(-1, calSpace.innerText.length) == "." |
+             calSpace.innerText.slice(-1, calSpace.innerText.length) == "=")) {
+                // console.log(calSpace.innerText.substring(0,calSpace.innerText.length));
+                 calSpace.innerText = calSpace.innerText.slice(0, calSpace.innerText.length-1)
+                
+            }
+
+            //
+            if(e.target.innerText == "=" && 
+            (calSpace.innerText.slice(-1, calSpace.innerText.length) == "+" |
+             calSpace.innerText.slice(-1, calSpace.innerText.length) == "-" |
+             calSpace.innerText.slice(-1, calSpace.innerText.length) == "*" |
+             calSpace.innerText.slice(-1, calSpace.innerText.length) == "/" |
+             calSpace.innerText.slice(-1, calSpace.innerText.length) == "." )){
+                return
+             }
+
+
+            if (e.target.innerText == "=") {
+                resultSpace.innerText = eval(calSpace.innerText.slice(0, calSpace.innerText.length - 1))
+            }
+            // 계산완료후 계산창에 계속 입력이 된다.(bug)
+            // 1. 계산완료 후 버튼을 눌렀을때 계산창, 결과창 초기화
+            // 2. 눌렀던 버튼의 값 출력
+            
+            // 계산창에 마지막 문자가 연산자일 경우, 계산창의 출력값은 그대로 유지하고
+            //  =버튼이 실행이 되지 않아야 한다.
+
+            // 0버튼은 중복으로 출력되지 않아야 한다.
+            // 계산창의 첫문자가 0이고 이어서 0버튼을 누르면 
+            // 첫번째 0만 출력되고 이후 나머지 숫자버튼을 입력했을떄 
+            // 첫번째 문자인 0이 삭제되고
+            // 나머지 값은 입력된다.
+
+            // 소수점 막기
+            // if((calSpace.innerText= (num).(num).){calSpace.innerText.slice(0,calSpace.innerText.length-1)}
+            // 조건 : 입력창에 숫자덩어리 + . + 숫자덩어리 + .이 입력된다면
+            // 마지막 문자인 .를 제외한 문자들을 입력한다.
+
+
+        })
     </script>
 </body>
 
