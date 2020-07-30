@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            height: 10px;
+            width: 10px;
+            padding: 6px;
+            text-align: center;
+        }
+        table {
+            border-spacing: 15px;
+
+        }
+        .result {
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="table-part">
+                <table style="width:100%" id="outer">
+                    <tr>
+                        <td colspan="4" class="result-window">
+                            <p class="cal"></p>
+                            <p class="result"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key plus">+</td>
+                        <td class="key minus">-</td>
+                        <td class="key multiplied">*</td>
+                        <td class="key divided">/</td>
+                    </tr>
+                    <tr>
+                        <td class="key 7">7</td>
+                        <td class="key 8">8</td>
+                        <td class="key 9">9</td>
+                        <td rowspan="4" class="key submit">=</td>
+                    </tr>
+                    <tr>
+                        <td class="key 4">4</td>
+                        <td class="key 5">5</td>
+                        <td class="key 6">6</td>
+                    </tr>
+                    <tr>
+                        <td class="key 1">1</td>
+                        <td class="key 2">2</td>
+                        <td class="key 3">3</td>
+                    </tr>
+                    <tr>
+                        <td class="key 0">0</td>
+                        <td class="key dot">.</td>
+                        <td class="key C">C</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 계산기 설계
+        // 0. 각 key에 식별자 지정
+        // 1. 결과창에 각 key가 입력되도록 하기
+        //    1-1) 키를 눌었을때 결과창에 키의 값을 불어온다.
+        // 2. '='버튼을 누르면 '='도 입력된 후 계산식 공간의 계산식이 계산된 후 
+        //     계산 결과 공간에 값이 출력된다.
+        // 3. 'C'버튼을 누르면 결과창 초기화
+        // 4.  시작시(결과창이 공백일때) 연산자를 클릭하면(연산자, 소수점) 출력되지 않는다.
+        // 5.  연산자가 중복으로 이어서 입력될 시 연산자가 출력되지 않는다. 
+
+
+        const calSpace = document.querySelector(".cal")
+        const resultSpace = document.querySelector(".result")
+        const submitBtn = document.querySelector(".submit")
+        const KEY = document.querySelectorAll("td")
+        const C = document.querySelector(".C")
+        
+        // bubbling 시행을 위한 변수 선언 
+        const Outline = document.querySelector("#outer")
+       
+
+        function isOperator (value){
+            return value === "+" || value ==="-" || value === "*"|| value === "/" || value === "." || value === "="
+        }
+
+        function isDigit (value) {
+            return value ==="1" ||value ==="2" ||value ==="3" ||value ==="4" ||value ==="5" ||value ==="6" ||value ==="7" ||value ==="8" ||value ==="9" ||value ==="0"
+        }
+       
+
+        //드래그 & 테이블 클릭시 버그 확인 -> 이후 grid로 작성 설계예정
+        Outline.addEventListener('mouseup', function (e) {
+            const input = e.target.innerText
+
+            // if(isOperator(input)===true && calSpace.innerText ===""){
+            //     return 
+            // }
+
+            if (e.target.innerText == "C") {
+                calSpace.innerHTML = ""
+                resultSpace.innerHTML = ""
+
+                return;
+                //return이후에 함수 완전 종료
+            }
+
+            if(resultSpace.innerText !==""){
+                calSpace.innerText = ""
+                resultSpace.innerText =""
+            }
+
+            // if (calSpace.innerText == "" && (e.target.innerText == "+" | e.target.innerText == "-" | e.target
+            //         .innerText == "*" | e.target.innerText == "/" | e.target.innerText == "." | e.target
+            //         .innerText == "=")) {
+
+            //     return
+            // }
+
+            // 소수점 중복 확인 로직
+            if(calSpace.innerText.indexOf(".") !==-1 && e.target.innerText == "."){
+                return
+            }
+
+          // 마지막 문자에 연산자를 입력하고 =버튼을 누른 경우 =이 입력되기 전 함수종료
+            if(isOperator(calSpace.innerText.slice(-1,calSpace.innerText.length))===true && input == "="  ){
+                return
+             }
+            
+             if(isOperator(input)===true && calSpace.innerText ===""){
+                return 
+            }
+             //버튼 입력(숫자/연산자/=버튼/cancel 입력)
+            calSpace.innerText += e.target.innerText
+      
+
+             // 첫번째 문자가 0이고 두번째 문자도 0일때 첫번째 0만 출력
+            if(calSpace.innerText.slice(0,1) == "0" && calSpace.innerText.slice(1,2) =="0"){
+                calSpace.innerText = calSpace.innerText.slice(0,1)
+           
+                }
+      
+    
+                // 첫번째 문자가 0이고 두번째 문자가 숫자일때 
+                // 첫번째 문자가 0일때는 0이 출력, 두번째 문자가 숫자일때는 두번째 문자부터 출력
+
+
+                // 0''
+
+            if(calSpace.innerText.slice(0,1)==="0" && isDigit(calSpace.innerText.slice(1,2))===true){
+                
+                calSpace.innerText = calSpace.innerText.slice(1)
+                
+            }
+            
+            console.log(calSpace.innerText.slice(-2, -1));
+
+            // 마지막에서두번째 문자도 연산자이고 마지막 문자도 연산자일때 처음부터 마지막 두번째 문자까지 출력
+            if ( isOperator(calSpace.innerText.slice(-2,-1))===true  && isOperator(calSpace.innerText.slice(-1))===true)
+             {
+                 calSpace.innerText = calSpace.innerText.slice(0, -1)
+                
+            }
+
+
+            //  계산 로직
+            if (e.target.innerText == "=") {
+                resultSpace.innerText = eval(calSpace.innerText.slice(0, calSpace.innerText.length - 1))
+            }
+
+            // 버그 수정 사항
+            // 계산완료후 계산창에 계속 입력이 된다.(bug)
+            // 1. 계산완료 후 버튼을 눌렀을때 계산창, 결과창 초기화
+            // 2. 눌렀던 버튼의 값 출력
+            
+            // 계산창에 마지막 문자가 연산자일 경우, 계산창의 출력값은 그대로 유지하고
+            //  =버튼이 실행이 되지 않아야 한다.
+
+            // 0버튼은 중복으로 출력되지 않아야 한다.
+            // 계산창의 첫문자가 0이고 이어서 0버튼을 누르면 
+            // 첫번째 0만 출력되고 이후 나머지 숫자버튼을 입력했을떄 
+            // 첫번째 문자인 0이 삭제되고
+            // 나머지 값은 입력된다.
+
+        })
+    </script>
+</body>
+
+</html>

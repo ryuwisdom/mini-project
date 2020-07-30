@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calclator</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&family=Quicksand:wght@600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            height: 560px;
+            width: 380px;
+            background: #0f0c29;
+            display: flex;
+            flex-direction: column;
+            justify-content:flex-start;
+            align-items: center;
+            bottom: 20px;
+            border-radius: 10px;
+            position: absolute;
+            top: 100px;
+            border-radius: 10px;
+        }
+
+        .top-side {
+            height: 140px;
+            width: 380px;
+            background: #E9E4F0;
+            margin-top: 0;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .formula,
+        .result {
+            height: 65px;
+            width: inherit;
+            margin-top: 5px;
+        }
+
+        .grid-side {
+            height: 360px;
+            width: 350px;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            grid-template-columns: auto auto auto auto;
+            /* gap: 10px; */
+            /* background: pink; */
+            border-radius: 10px;
+            margin-top: 20px
+        }
+
+        .item {
+            height: 60px;
+            width: 60px;
+            justify-content: center;
+            text-align: center;
+            line-height: 60px;
+            background: transparent;
+            border-radius: 50%;
+            margin: 5px 12px;
+            border: whitesmoke 2px solid;
+
+            color: whitesmoke;
+            font-size: 2rem;
+        }
+
+        .submit {
+            /* border: tomato 2px solid; */
+            border: none;
+            background: #86A8E7;
+            grid-column: 1 / 5;
+            border-radius: 15px;
+            padding: 0 125px;
+        }
+        .calBtn {
+            color: #86A8E7;
+            border: #86A8E7 2px solid;
+            color: whitesmoke;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="top-side">
+            <div id="formula"></div>
+            <div id="result"></div>
+        </div>
+        <div class="grid-side">
+            <div class="item calBtn">+</div>
+            <div class="item calBtn">-</div>
+            <div class="item calBtn">*</div>
+            <div class="item calBtn">C</div>
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item calBtn">/</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
+            <div class="item">6</div>
+            <div class="item calBtn">.</div>
+            <div class="item">7</div>
+            <div class="item">8</div>
+            <div class="item">9</div>
+            <div class="item">0</div>
+            <div class="item submit">=</div>
+
+        </div>
+    </div>
+    <script>
+        const formulaDisplay = document.getElementById("formula")
+        const resultDisplay = document.getElementById("result")
+        const KEY = document.getElementsByClassName("item")
+        const submit = document.getElementsByClassName("submit")
+        const Cancel = document.getElementsByClassName("C")
+
+        const Outline = document.getElementsByClassName("grid-side")
+
+
+
+
+
+    </script>
+</body>
+
+</html>
