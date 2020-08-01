@@ -112,7 +112,6 @@
                 resultSpace.innerHTML = ""
 
                 return;
-                //return이후에 함수 완전 종료
             }
 
             if(resultSpace.innerText !==""){
@@ -120,12 +119,6 @@
                 resultSpace.innerText =""
             }
 
-            // if (calSpace.innerText == "" && (e.target.innerText == "+" | e.target.innerText == "-" | e.target
-            //         .innerText == "*" | e.target.innerText == "/" | e.target.innerText == "." | e.target
-            //         .innerText == "=")) {
-
-            //     return
-            // }
 
             // 소수점 중복 확인 로직
             if(calSpace.innerText.indexOf(".") !==-1 && e.target.innerText == "."){

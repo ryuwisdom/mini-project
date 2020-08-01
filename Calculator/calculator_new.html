@@ -40,16 +40,23 @@
         .top-side {
             height: 140px;
             width: 380px;
-            background: #E9E4F0;
+            /* background: #0f0c29; */
             margin-top: 0;
             border-radius: 10px 10px 0 0;
+            color: cornsilk;
         }
 
-        .formula,
-        .result {
+        #formula,
+        #result {
             height: 65px;
-            width: inherit;
+            width: 100%;
             margin-top: 5px;
+            color: whitesmoke;
+            text-align: right;
+            /* border: 1px solid white; */
+            font-size: 3rem;
+            overflow: hidden;
+            margin: 10px 20px;
         }
 
         .grid-side {
@@ -59,7 +66,7 @@
             justify-content: center;
             align-items: center;
             grid-template-columns: auto auto auto auto;
-            /* gap: 10px; */
+            gap: 16px;
             /* background: pink; */
             border-radius: 10px;
             margin-top: 20px
@@ -73,20 +80,22 @@
             line-height: 60px;
             background: transparent;
             border-radius: 50%;
-            margin: 5px 12px;
+            /* margin: 5px ; */
             border: whitesmoke 2px solid;
-
+            
             color: whitesmoke;
             font-size: 2rem;
         }
 
         .submit {
             /* border: tomato 2px solid; */
+            width: 100%;
             border: none;
             background: #86A8E7;
             grid-column: 1 / 5;
+
             border-radius: 15px;
-            padding: 0 125px;
+            /* padding: 0 125px; */
         }
         .calBtn {
             color: #86A8E7;
@@ -94,6 +103,7 @@
             color: whitesmoke;
         }
 
+        
     </style>
 </head>
 
@@ -104,7 +114,7 @@
             <div id="formula"></div>
             <div id="result"></div>
         </div>
-        <div class="grid-side">
+        <div class="grid-side" id="Outer">
             <div class="item calBtn">+</div>
             <div class="item calBtn">-</div>
             <div class="item calBtn">*</div>
@@ -126,16 +136,95 @@
         </div>
     </div>
     <script>
+        // 계산기 설계
+        // 1. 클릭이 되는 키버튼 식별자 생성
+        // 2. 키버튼을 눌렀을때 계산창에 출력확인
+        // 3. 구동 조건
+        //      3-1)계산창이 공백인 상태에서 숫자이외 문자 입력 안됨
+        //      3-2)계산창이 공백인 상태에서 0 중복 입력 안됨
+        //      3-3)한 수에 .이 한 번 이상 입력 안됨
+        //      3-4)연산자 입력 후 연산자, .은 이어 입력 안됨
+        //      3-5)계산창과 결과창에 값이 입력된 상태에서 연산자, .을 누르면 화면 초기화
+        //      3-6)계산창 마지막문자가 =일 경우, 첫번째부터 마지막에서 1자리 앞자리 문자값만 입력
+
         const formulaDisplay = document.getElementById("formula")
         const resultDisplay = document.getElementById("result")
         const KEY = document.getElementsByClassName("item")
         const submit = document.getElementsByClassName("submit")
         const Cancel = document.getElementsByClassName("C")
+        const Outline = document.getElementById("Outer")
 
-        const Outline = document.getElementsByClassName("grid-side")
+        function isOperator(value){
+            return value === "+"||value === "-"||value === "*"||value === "/"||value === "."||value === "="
+        }
+
+        function isDigit (value) {
+            return value ==="1"||value ==="2"||value ==="3"||value ==="4"||value ==="5"||value ==="6"||value ==="7"||value ==="8"||value ==="9"||value ==="0"
+        }
+
+
+        Outline.addEventListener('mousedown', function (e) {
+            const input = e.target.innerText
+            
+            if(e.target.id == "Outer") return;
+            e.stopPropagation();
+            
+            // Cancel 버튼 기능 로직(삭제)
+            if(e.target.innerText === "C"){
+                formulaDisplay.innerHTML = ""
+                resultDisplay.innerHTML = ""
+                return
+            }
+             // 결과창에 값이 있을때(계산창에도 값 존재) 초기화
+            if(resultDisplay.innerText !==""){
+                formulaDisplay.innerHTML = ""
+                resultDisplay.innerHTML = ""
+            }
+            // 소수점 중복 확인 로직
+            if(formulaDisplay.innerText.indexOf(".") !==1 && e.target.innerText === "."){
+                return
+            }
+
+            //마지막 문자에 연산자를 입력하고 =버튼을 누른경우, =버튼이 입력되기 전 함수 종료
+            if(isOperator(formulaDisplay.innerText.slice(-1,formulaDisplay.innerText.length))===true && input ==="="){
+                return
+            }
+
+            //공백일때 연산자 입력시 함수 종료
+            if(isOperator(input)===true && formulaDisplay.innerText === ""){
+                return
+            }
+
+            // 버튼 출력(숫자/연산자/=/C)
+            formulaDisplay.innerHTML += e.target.innerText
+
+            //첫번째 입력값이 0이고 연속해서 0을 입력했을때 중복방지 로직
+            if(formulaDisplay.innerText.slice(0,1) === "0" && formulaDisplay.innerText.slice(1,2)==="0"){
+                formulaDisplay.innerText = formulaDisplay.innerText.slice(0,1)
+            }
+
+            //첫번째 입력값이 0이고 두번째 문자는 숫자일때 두번째 문자부터 출력
+            if(formulaDisplay.innerText.slice(0,1) ==="0" && isDigit(formulaDisplay.innerText.slice(1,0))===true){
+                formulaDisplay.innerText = formulaDisplay.innerText.slice(1)
+            }
+
+            //마지막에서 두번째 문자도 연산자, 마지막 문자도 연산자일때 처음부터 마지막 두번째문자까지 입력
+            if(isOperator(formulaDisplay.innerText.slice(-2,-1))===true && isOperator(formulaDisplay.innerText.slice(-1))===true){
+                formulaDisplay.innerText = formulaDisplay.innerText.slice(0,-1)
+            }
+            
+            //계산 로직
+
+            if(input ==="="){
+                resultDisplay.innerText = eval(formulaDisplay.innerText.slice(0, formulaDisplay.innerText.length-1))
+            }
 
 
 
+
+
+
+        })
 
 
     </script>

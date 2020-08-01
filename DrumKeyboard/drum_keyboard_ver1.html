@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drum_Keyboard</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<style>
+    /* @import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400&display=swap'); */
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Rowdies', cursive;
+
+    }
+
+    body {
+        background-color: #222831;
+        background-size: cover;
+    }
+
+    .container {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .drum_image {
+        height: 550px;
+        width: 800px;
+        padding-top: 200px;
+        padding-right: 50px;
+    }
+
+    .side {
+        width: 500px;
+        height: 800px;
+
+    }
+
+    .instrumnets {
+        height: 800px;
+        width: 350px;
+        background: silver;
+        border-radius: 10px;
+        position: absolute;
+        right: 20px;
+        top: 30px;
+
+    }
+
+    .side-top {
+        height: 100px;
+        width: 100%;
+        /* border: 1px solid black; */
+        background: #f2a365;
+        border-radius: 10px 10px 0px 0px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        font-weight: lighter;
+        font-size: 2rem;
+
+    }
+
+    .side-main {
+        height: 720px;
+        width: 100%;
+        /* border: 1px solid red; */
+        background: #ececec;
+        border-radius: 0px 0px 10px 10px;
+    }
+
+    .inner-key {
+        height: 80px;
+        width: 90%;
+        /* border: 1px solid blue; */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .K {
+        height: 35px;
+        width: 35px;
+        border: 2px solid black;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 35px;
+    }
+
+    
+
+    .inner-key div:nth-child(2) {
+        font-size: 1.3rem;
+        font-weight: lighter;
+        margin-right: 45px;
+    }
+
+    .inner-key div:nth-child(1) {
+        font-size: 1.3rem;
+        font-weight: lighter;
+        margin-left: 45px;
+    }
+
+    .Kick {
+        font-size: 1.3rem;
+        font-weight: lighter;
+        margin-right: 45px;
+    }
+
+   
+</style>
+
+<body>
+
+    <div class="container">
+
+        <div class="drum_img">
+            <img class="drum_image" src="img/drum.png" alt="drum_image">
+        </div>
+        <div class="side">
+            <div class="instrumnets">
+                <div class="side-top">
+                    <p>Key Mapping</p>
+                </div>
+                <div class="side-main">
+                    <div class="keys">
+                        <div class="inner-key">
+                            <div class="K">A</div>
+                            <div>Crash</div>
+                        </div>
+                        <div class="inner-key">
+                            <div class="K">R</div>
+                            <div>Ride</div>
+                        </div>
+                        <div class="inner-key">
+                            <div class="K">D</div>
+                            <div>Floor tom</div>
+                        </div>
+                        <div class="inner-key">
+                            <div class="K">F</div>
+                            <div>Mid tom</div>
+                        </div>
+                        <div class="inner-key">
+                            <div class="K">G</div>
+                            <div>High tom</div>
+                        </div>
+                        <div class="inner-key">
+                            <div class="K">N</div>
+                            <div class="K">M</div>
+                            <div class="Kick">Kick</div>
+                        </div>
+                        <div class="inner-key">
+                            <div class="K">H</div>
+                            <div>Snare</div>
+                        </div>
+                        <div class="inner-key">
+                            <div class="K">J</div>
+                            <div>Hi-Hat Open</div>
+                        </div>
+                        <div class="inner-key">
+                            <div class="K">K</div>
+                            <div>Hi-Hat Closed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 키보드 드럼 설계서
+
+        //HTML
+        // 1. 드럼 이미지 들어갈 공간 선정
+        // 2. 드럼 이미지에 키가 눌러지면 움직이는(반응하는) 위치 선정
+        // 3. 반응될 드럼 악기들 리스트, 키버튼 제작
+
+        // JS
+        // 0. 반응할 키보드 키 선정
+        // 1. 각 키에 반응할 사운드와 해당키를 연결시킨다. (해당키 값 지정 필요)
+        // 2. 연결된 키와 키를 누르면 움직일 이미지의 효과를 실행시킨다.
+        // 3. 키와 연결된 이미지에 후에 키가 눌러졌을때 반응할 각도를 설정한다.
+        // 4. 이벤트를 달아준다.
+        //      조건1) 동시에 여러 해당키를 누르는 것이 가능
+        //      조건2) 해당키를 누르면 키버튼에 색깔이 변한다. + 해당키에 반응하는 이미지 효과를 실행시킨다.  
+        //      조건3) 해당키를 누르지 않은 상태일때 다시 초기의 색으로 돌아온다. + 해당키에 반응하는 이미지 효과가 초기의 상태로 돌아온다.
+
+
+        //특정키를 눌렀을때 연결된 사운드 송출 조건 
+        // function isInclues (value) {
+        //     return value === 65 || value === 83 || value === 68 ||value === 70 ||value === 71 ||value === 72 ||value === 74 ||value === 75 || value === 78|| value === 77 
+        // }
+
+        // 특정 키를 눌렀을때 이벤트
+        // if(key == 65) {
+        //     console.log("+_+");
+        // }
+        // else if(key == 39) {
+        //     console.log("*_*");
+        // }
+
+
+        // if(event.keyCode === 65){
+        //     hiHatClosed.play()
+        // }
+
+
+        // 버튼 누르면 색변화하는 함수
+    //     function changeColor () {
+    //         back = setTimeout(function(){
+    //         document.getElementById("k1").style.background = "yellow"
+    //         },10) 
+    // }
+        
+
+        document.addEventListener('keydown', function (event) {
+            const key = event.keyCode
+            const color = document.querySelector(`.K${charCodeAt()}=${key}`)
+
+
+
+            // audio객체 생성
+            // const crash = new Audio("./sounds/crash.wav")
+            // const ride = new Audio("./sounds/ride.wav")
+            // const floorTom = new Audio("./sounds/tom-low.wav")
+            // const midTom = new Audio("./sounds/tom-mid.wav")
+            // const highTom = new Audio("./sounds/tom-high.wav")
+            // const kick = new Audio("./sounds/kick.wav")
+            // const snare = new Audio("./sounds/snare.wav")
+            // const hiHatOpen = new Audio("./sounds/hihat-open.wav")
+            // const hiHatClosed = new Audio("./sounds/hihat-close.wav")
+
+            // 눌러진 키가 A일때 crash객체만 생성, 송출 
+            if (key === "A".charCodeAt() || key === "a".charCodeAt()) {
+                new Audio("./sounds/crash.wav").play()
+                K
+                
+                document.getElementById("k1").style.backgroundColor = "yellow";                
+            }
+            if (key === "S".charCodeAt() || key === "s".charCodeAt() ) {
+                new Audio("./sounds/ride.wav").play()
+            }
+            if (key === "D".charCodeAt() || key === "d".charCodeAt()) {
+                new Audio("./sounds/tom-low.wav").play()
+            }
+            if (key === "F".charCodeAt() || key === "f".charCodeAt()) {
+                new Audio("./sounds/tom-mid.wav").play()
+            }
+            if (key === "G".charCodeAt() || key === "g".charCodeAt()) {
+                new Audio("./sounds/tom-high.wav").play()
+            }
+            if (key === "H".charCodeAt() || key === "h".charCodeAt()) {
+                new Audio("./sounds/snare.wav").play()
+            }
+            if (key === "J".charCodeAt() || key === "j".charCodeAt()) {
+                new Audio("./sounds//hihat-open.wav").play()
+            }
+            if (key === "K".charCodeAt() || key === "k".charCodeAt()) {
+                new Audio("./sounds/hihat-close.wav").play()
+            }
+            if (key === "N".charCodeAt() || key === "n".charCodeAt()) {
+                new Audio("./sounds/kick.wav").play()
+            }
+            if (key === "M".charCodeAt() || key === "m".charCodeAt()) {
+                new Audio("./sounds/kick.wav").play()
+            }
+
+            // 눌러진 키의 값을 어떻게 불어오지?
+            // 눌러진 키가 A일때 crash객체만 생성, 송출
+            // console.log(key.target)d;
+
+            // 객체생성
+
+
+
+            // function Sounds (value) {
+            //     return 
+            // }
+
+            // 특정키 중 하나가 눌러졌을때 눌러진 특정키와 연결된 사운드를 
+
+
+
+
+
+            // if(key===65){
+            //     crash.play()
+            // } else if(key===83){
+            //     ride.play()
+            // } else if(key===68){
+            //     floorTom.play()
+            // } else if(key===70){
+            //     midTom.play()
+            // } else if(key===71){
+            //     highTom.play()
+            // } else if(key===72){
+            //     snare.play()
+            // } else if(key===74){
+            //     hiHatOpen.play()
+            // } else if(key===75){
+            //     hiHatClosed.play()
+            // } else if(key===78){
+            //     kick.play()
+            // } else if(key===77){
+            //     kick.play()
+            // } 
+
+
+
+
+
+
+        });
+    </script>
+</body>
+
+</html>
