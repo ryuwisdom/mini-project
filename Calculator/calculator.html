@@ -106,14 +106,14 @@
             // if(isOperator(input)===true && calSpace.innerText ===""){
             //     return 
             // }
-
+            // Cancel 버튼 기능 로직(삭제)
             if (e.target.innerText == "C") {
                 calSpace.innerHTML = ""
                 resultSpace.innerHTML = ""
 
                 return;
             }
-
+            // 결과창에 값이 있을때(계산창에도 값 존재) 초기화
             if(resultSpace.innerText !==""){
                 calSpace.innerText = ""
                 resultSpace.innerText =""

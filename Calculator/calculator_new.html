@@ -44,19 +44,24 @@
             margin-top: 0;
             border-radius: 10px 10px 0 0;
             color: cornsilk;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         #formula,
         #result {
             height: 65px;
-            width: 100%;
-            margin-top: 5px;
+            width: 320px;
+            margin-top: 10px;
             color: whitesmoke;
             text-align: right;
             /* border: 1px solid white; */
             font-size: 3rem;
             overflow: hidden;
-            margin: 10px 20px;
+            
+            
         }
 
         .grid-side {
@@ -181,7 +186,7 @@
                 resultDisplay.innerHTML = ""
             }
             // 소수점 중복 확인 로직
-            if(formulaDisplay.innerText.indexOf(".") !==1 && e.target.innerText === "."){
+            if(formulaDisplay.innerText.indexOf(".") !==-1 && e.target.innerText === "."){
                 return
             }
 

@@ -9,7 +9,7 @@
 </head>
 
 <style>
-    /* @import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400&display=swap'); */
+    @import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400&display=swap');
     * {
         margin: 0;
         padding: 0;
@@ -19,6 +19,7 @@
 
     body {
         background-color: #222831;
+        /* background-image: url("img/background1.jpg"); */
         background-size: cover;
     }
 
@@ -28,29 +29,88 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
     }
 
     .drum_image {
         height: 550px;
         width: 800px;
-        padding-top: 200px;
-        padding-right: 50px;
+        padding-top: 240px;
+        padding-left: 200px;
     }
+
+    .spotlight_img_L {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+    .spotlight_img_R {
+        position: absolute;
+        top: 0px;
+        right: 300px;
+    }
+
+    .spotlight_img_L img{
+        height: 300px;
+        width: 300px;
+        animation-name: left;
+        animation-delay: 1s;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        transition-property: all;
+        transition-timing-function: ease-in-out;
+        transition: 1.2s;
+
+    }
+    .spotlight_img_R img{
+        height: 300px;
+        width: 300px;
+        transform: rotate(90deg);
+        animation-name: right;
+        animation-delay: 2s;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+        transition-property: all;
+        transition: 1.2s;
+        transition-timing-function: ease-in-out;
+    }
+    @keyframes left {
+        from{
+            transform: rotate(5deg);
+            transition: 1.5s;
+    }
+        to{
+            transform: rotate(-5deg);
+            transition: 2s;
+        }
+     }
+    @keyframes right {
+        from{
+            transform: rotate(95deg);
+    }
+        to{
+            transform: rotate(85deg);
+        }
+     }
+    
+
+
 
     .side {
         width: 500px;
-        height: 800px;
+        height: 600px;
 
     }
 
     .instrumnets {
         height: 800px;
-        width: 350px;
+        width: 280px;
         background: silver;
         border-radius: 10px;
         position: absolute;
         right: 20px;
         top: 30px;
+        opacity: 90%;
 
     }
 
@@ -93,14 +153,22 @@
         border-radius: 5px;
         text-align: center;
         line-height: 35px;
+        transition: 1.5s;
     }
 
+    .K:hover,
+    .active {
+        border-color: #ffc600;
+        background: #ffc600;
+        box-shadow: 0 0 10px #ffc600;
+        transition: 0.3s;
+    }
     
 
     .inner-key div:nth-child(2) {
         font-size: 1.3rem;
         font-weight: lighter;
-        margin-right: 45px;
+        margin-right: 20px;
     }
 
     .inner-key div:nth-child(1) {
@@ -112,7 +180,7 @@
     .Kick {
         font-size: 1.3rem;
         font-weight: lighter;
-        margin-right: 45px;
+        margin-right: 20px;
     }
 
    
@@ -125,6 +193,12 @@
         <div class="drum_img">
             <img class="drum_image" src="img/drum.png" alt="drum_image">
         </div>
+        <div class="spotlight_img_L">
+            <img src="img/spotlight.png" alt="spotlight_img">
+        </div>
+        <div class="spotlight_img_R">
+            <img src="img/spotlight.png" alt="spotlight_img">
+        </div>
         <div class="side">
             <div class="instrumnets">
                 <div class="side-top">
@@ -133,40 +207,41 @@
                 <div class="side-main">
                     <div class="keys">
                         <div class="inner-key">
-                            <div class="K">A</div>
+                            <div class="K A">A</div>
                             <div>Crash</div>
+
                         </div>
                         <div class="inner-key">
-                            <div class="K">R</div>
+                            <div class="K S">S</div>
                             <div>Ride</div>
                         </div>
                         <div class="inner-key">
-                            <div class="K">D</div>
+                            <div class="K D">D</div>
                             <div>Floor tom</div>
                         </div>
                         <div class="inner-key">
-                            <div class="K">F</div>
+                            <div class="K F">F</div>
                             <div>Mid tom</div>
                         </div>
                         <div class="inner-key">
-                            <div class="K">G</div>
+                            <div class="K G">G</div>
                             <div>High tom</div>
                         </div>
                         <div class="inner-key">
-                            <div class="K">N</div>
-                            <div class="K">M</div>
+                            <div class="K N">N</div>
+                            <div class="K M">M</div>
                             <div class="Kick">Kick</div>
                         </div>
                         <div class="inner-key">
-                            <div class="K">H</div>
+                            <div class="K H">H</div>
                             <div>Snare</div>
                         </div>
                         <div class="inner-key">
-                            <div class="K">J</div>
+                            <div class="K J">J</div>
                             <div>Hi-Hat Open</div>
                         </div>
                         <div class="inner-key">
-                            <div class="K">K</div>
+                            <div class="K K1">K</div>
                             <div>Hi-Hat Closed</div>
                         </div>
                     </div>
@@ -213,18 +288,37 @@
         // }
 
 
-        // 버튼 누르면 색변화하는 함수
-    //     function changeColor () {
-    //         back = setTimeout(function(){
-    //         document.getElementById("k1").style.background = "yellow"
-    //         },10) 
-    // }
         
+                    const A = document.querySelector(".A")
+                    const S = document.querySelector(".S")
+                    const D = document.querySelector(".D")
+                    const F = document.querySelector(".F")
+                    const G = document.querySelector(".G")
+                    const N = document.querySelector(".N")
+                    const M = document.querySelector(".M")
+                    const H = document.querySelector(".H")
+                    const J = document.querySelector(".J")
+                    const K = document.querySelector(".K1")
+
+       
+                //keyup시 추가한 class제거 
+                document.addEventListener("keyup", ()=>{
+                    A.classList.remove('active');
+                    S.classList.remove('active');
+                    D.classList.remove('active');
+                    F.classList.remove('active');
+                    G.classList.remove('active');
+                    N.classList.remove('active');
+                    M.classList.remove('active');
+                    H.classList.remove('active');
+                    J.classList.remove('active');
+                    K.classList.remove('active');
+                    
+                    })
+
 
         document.addEventListener('keydown', function (event) {
             const key = event.keyCode
-            const color = document.querySelector(`.K${charCodeAt()}=${key}`)
-
 
 
             // audio객체 생성
@@ -238,40 +332,55 @@
             // const hiHatOpen = new Audio("./sounds/hihat-open.wav")
             // const hiHatClosed = new Audio("./sounds/hihat-close.wav")
 
-            // 눌러진 키가 A일때 crash객체만 생성, 송출 
+            // 해당 키 눌러졌을때 해당 사운드 생성, 송출 
             if (key === "A".charCodeAt() || key === "a".charCodeAt()) {
-                new Audio("./sounds/crash.wav").play()
-                K
-                
-                document.getElementById("k1").style.backgroundColor = "yellow";                
+                new Audio("./sounds/crash.wav").play()   
+                A.classList.add("active")
+
             }
             if (key === "S".charCodeAt() || key === "s".charCodeAt() ) {
                 new Audio("./sounds/ride.wav").play()
+                S.classList.add("active")
+                        
             }
             if (key === "D".charCodeAt() || key === "d".charCodeAt()) {
                 new Audio("./sounds/tom-low.wav").play()
+                D.classList.add("active")
             }
             if (key === "F".charCodeAt() || key === "f".charCodeAt()) {
                 new Audio("./sounds/tom-mid.wav").play()
+                F.classList.add("active")
             }
             if (key === "G".charCodeAt() || key === "g".charCodeAt()) {
                 new Audio("./sounds/tom-high.wav").play()
+                G.classList.add("active")
             }
             if (key === "H".charCodeAt() || key === "h".charCodeAt()) {
                 new Audio("./sounds/snare.wav").play()
+                H.classList.add("active")
             }
             if (key === "J".charCodeAt() || key === "j".charCodeAt()) {
                 new Audio("./sounds//hihat-open.wav").play()
+                J.classList.add("active")
             }
             if (key === "K".charCodeAt() || key === "k".charCodeAt()) {
                 new Audio("./sounds/hihat-close.wav").play()
+                K.classList.add("active")
             }
             if (key === "N".charCodeAt() || key === "n".charCodeAt()) {
                 new Audio("./sounds/kick.wav").play()
+                N.classList.add("active")
             }
             if (key === "M".charCodeAt() || key === "m".charCodeAt()) {
                 new Audio("./sounds/kick.wav").play()
+                M.classList.add("active")
             }
+
+
+            
+
+
+
 
             // 눌러진 키의 값을 어떻게 불어오지?
             // 눌러진 키가 A일때 crash객체만 생성, 송출
