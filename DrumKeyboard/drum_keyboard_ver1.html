@@ -33,10 +33,11 @@
     }
 
     .drum_image {
-        height: 550px;
-        width: 800px;
-        padding-top: 240px;
+        height: 500px;
+        width: 750px;
+        padding-top: 260px;
         padding-left: 200px;
+        z-index: 2;
     }
 
     .spotlight_img_L {
@@ -94,8 +95,33 @@
      }
     
 
+   
+    .miffy_img img{
+        height: 550px;
+        width: 500px;
+        position: absolute;
+        right: 680px;
+        bottom: 320px;
+        z-index: -1;
+    }
 
+    .miffy1 {
+        transform: rotate(10deg);
+    }
 
+    .miffy2 {
+        transform: rotate(-20deg);
+    }
+
+    /* .miffy1:hover{
+        transform: rotate(10deg);
+    }
+
+    .miffy2:hover{
+        transform: rotate(-20deg);
+    } */
+
+  
     .side {
         width: 500px;
         height: 600px;
@@ -199,6 +225,9 @@
         <div class="spotlight_img_R">
             <img src="img/spotlight.png" alt="spotlight_img">
         </div>
+        <div class="miffy_img">
+            <img src="img/miffy.png" alt="miffy_img" class="miffy" >
+        </div>
         <div class="side">
             <div class="instrumnets">
                 <div class="side-top">
@@ -288,6 +317,9 @@
         // }
 
 
+
+      
+
         
                     const A = document.querySelector(".A")
                     const S = document.querySelector(".S")
@@ -299,6 +331,7 @@
                     const H = document.querySelector(".H")
                     const J = document.querySelector(".J")
                     const K = document.querySelector(".K1")
+                    const miffy = document.querySelector(".miffy")
 
        
                 //keyup시 추가한 class제거 
@@ -316,64 +349,76 @@
                     
                     })
 
+                document.addEventListener("keyup", ()=>{
+                    miffy.classList.remove('miffy1');
+                    miffy.classList.remove('miffy2');
+                   
+                    })
+
 
         document.addEventListener('keydown', function (event) {
             const key = event.keyCode
 
 
-            // audio객체 생성
-            // const crash = new Audio("./sounds/crash.wav")
-            // const ride = new Audio("./sounds/ride.wav")
-            // const floorTom = new Audio("./sounds/tom-low.wav")
-            // const midTom = new Audio("./sounds/tom-mid.wav")
-            // const highTom = new Audio("./sounds/tom-high.wav")
-            // const kick = new Audio("./sounds/kick.wav")
-            // const snare = new Audio("./sounds/snare.wav")
-            // const hiHatOpen = new Audio("./sounds/hihat-open.wav")
-            // const hiHatClosed = new Audio("./sounds/hihat-close.wav")
+        //     function miffyMoving(){
+        //     if(key){
+
+        //     }
+        // }
+
 
             // 해당 키 눌러졌을때 해당 사운드 생성, 송출 
             if (key === "A".charCodeAt() || key === "a".charCodeAt()) {
                 new Audio("./sounds/crash.wav").play()   
                 A.classList.add("active")
+                miffy.classList.add("miffy1")
 
             }
             if (key === "S".charCodeAt() || key === "s".charCodeAt() ) {
                 new Audio("./sounds/ride.wav").play()
                 S.classList.add("active")
+                miffy.classList.add("miffy2")
                         
             }
             if (key === "D".charCodeAt() || key === "d".charCodeAt()) {
                 new Audio("./sounds/tom-low.wav").play()
                 D.classList.add("active")
+                miffy.classList.add("miffy1")
             }
             if (key === "F".charCodeAt() || key === "f".charCodeAt()) {
                 new Audio("./sounds/tom-mid.wav").play()
                 F.classList.add("active")
+                miffy.classList.add("miffy2")
             }
             if (key === "G".charCodeAt() || key === "g".charCodeAt()) {
                 new Audio("./sounds/tom-high.wav").play()
                 G.classList.add("active")
+                miffy.classList.add("miffy1")
             }
             if (key === "H".charCodeAt() || key === "h".charCodeAt()) {
                 new Audio("./sounds/snare.wav").play()
                 H.classList.add("active")
+                miffy.classList.add("miffy2")
             }
             if (key === "J".charCodeAt() || key === "j".charCodeAt()) {
                 new Audio("./sounds//hihat-open.wav").play()
                 J.classList.add("active")
+                miffy.classList.add("miffy1")
             }
             if (key === "K".charCodeAt() || key === "k".charCodeAt()) {
                 new Audio("./sounds/hihat-close.wav").play()
                 K.classList.add("active")
+                miffy.classList.add("miffy2")
             }
             if (key === "N".charCodeAt() || key === "n".charCodeAt()) {
                 new Audio("./sounds/kick.wav").play()
                 N.classList.add("active")
+                miffy.classList.add("miffy1")
             }
             if (key === "M".charCodeAt() || key === "m".charCodeAt()) {
                 new Audio("./sounds/kick.wav").play()
                 M.classList.add("active")
+                miffy.classList.add("miffy2")
             }
 
 
