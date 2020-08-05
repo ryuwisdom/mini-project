@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>typingGame</title>
+
+    <style>
+        #text {
+            height: 50px;
+            width: 400px;
+        }
+
+        #result {
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1 id="quiz"></h1>
+        <input type="text" id="text" autocomplete="off">
+        <p id="time">Time</p>
+        <p id="score">Score : 0</p>
+    </div>
+
+    <script>
+      
+        const textSpace = document.getElementById("text")
+        const submitButton = document.getElementById("result")
+        const quizWords = document.getElementById("quiz")
+        const Score = document.getElementById("score")
+        const time = document.getElementById("time")
+
+        const result = document.getElementsByClassName("container")[0]
+        const fruits = ["apple", "mango", "strawberry"]
+        let leftTime = 10
+        let random = 0
+        let score = 0
+        let id = 0
+
+        // 전역변수 random을 fruits배열 길이의 수로 바꿔주는 함수
+        function action() {
+            random = Math.floor(Math.random() * fruits.length)
+
+        }
+
+        action()
+
+        // 1초씩 감소하는 로직
+        id = setInterval(() => {
+            // time칸에 Left time : lefttime이 1초씩 감소한다.
+            // ex) 10입력시 time칸에 10이 입력되고 lefttime은 1초가 감소됨
+            time.innerText = `Left time : ${leftTime--}`
+
+            // lefttime은 9인상태
+
+            // lefttime이 -1이 될때 실행되는 if문 
+            if (leftTime === -1) {
+
+                // time칸에 Time Over 출력
+                time.innerText = "Time Over"
+                
+                // interval 종료
+                // 위치이유 : Time Over 입력 이후에 interval 종료하기 위함
+                clearInterval(id)
+                // listener 종료
+                // 위치이유 : Time Over 입력 이후에 listener 종료 위함
+                textSpace.removeEventListener('keyup', keyupHandler)
+
+            }
+        }, 1000);
+
+
+        // quizeWords칸에 랜덤한 fruits 배열값 출력
+        quizWords.innerText = fruits[random]
+        
+        // keyupHandler 함수 실행 
+        function keyupHandler() {
+            // 답입력칸 값과 랜덤한 fruits 배열값이 일치할때 if문 실행
+            if (textSpace.value === fruits[random]) {
+
+                // Score칸에 Score : socre로 지정한 변수의 값이 전의연산자에 1씩 증가하고 출력
+                Score.innerText = `Score : ${++score}`
+                
+                // (기존단어를 새로운 단어로 교체하기위한)action함수 실행
+                action()
+
+                // quizWords칸에 교체된 fruits 랜덤 배열값 출력
+                quizWords.innerText = fruits[random]
+
+                // leftTIme 10초로 초가화
+                leftTime = 10
+
+                // 답입력값을 빈칸으로 설정
+                textSpace.value = ""
+
+            }
+        }
+
+        // 답입력칸에 keyup에 의해 keyupHandler함수가 실행되는 listener 실행
+        textSpace.addEventListener('keyup', keyupHandler)
+
+    </script>
+</body>
+
+</html>
