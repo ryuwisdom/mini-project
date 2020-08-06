@@ -7,14 +7,39 @@
     <title>typingGame</title>
 
     <style>
+        body {
+            background-color: deeppink;
+        }
+        .container {
+            height: 700px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
         #text {
-            height: 50px;
-            width: 400px;
+            height: 45px;
+            width: 350px;
+            border-style: none;
+            border-radius: 5px;
+
         }
 
-        #result {
-            height: 50px;
+        h1 {
+            font-size: 5rem;
+            color: gold;
+            text-shadow: 1px 1px darkorange;
         }
+        p {
+            font-size: 2rem;
+            color: gold;
+            text-shadow: 1px 1px darkorange;
+            font-weight: bold;
+        }
+
+       
+
+
     </style>
 </head>
 
@@ -23,7 +48,7 @@
 
         <h1 id="quiz"></h1>
         <input type="text" id="text" autocomplete="off">
-        <p id="time">Time</p>
+        <p id="time"></p>
         <p id="score">Score : 0</p>
     </div>
 

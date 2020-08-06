@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>>>typingGame</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-image: url(./images/rome.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: 0.9;
+            font-family: 'Noto Sans KR', sans-serif;
+
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 50px;
+        }
+
+
+        h1 {
+            font-size: 3.5rem;
+            padding-bottom: 10px;
+            text-shadow: 1px 1px rgb(138, 167, 167);
+        }
+
+        small,
+        p {
+            font-size: 2rem;
+            padding-bottom: 50px;
+            font-weight: bolder;
+            color: cornsilk;
+            text-shadow: 1px 1.5px darkslategrey;
+        }
+
+        input {
+            width: 350px;
+            height: 40px;
+            border-radius: 3px;
+            border-style: none;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="container">
+
+        <h1 id="quiz"></h1>
+        <small id="time"></small>
+        <input type="text" id="answerForm">
+        <p id="scoreForm">Score : 0</p>
+
+    </div>
+
+    <script>
+        const quizWords = document.getElementById("quiz")
+        const quizTime = document.getElementById("time")
+        const answerForm = document.getElementById("answerForm")
+        const scoreForm = document.getElementById("scoreForm")
+        const cities = ["seoul", "tokyo", "newyork", "mexicocity", "hongkong", "havana", "melbourne", "manila"]
+        let random = 0;
+        let leftTime = 10;
+        let id = 0;
+        let score = 0;
+
+
+        // city 배열이 랜덤하게 나오는 함수 로직
+        function start() {
+            random = Math.floor(Math.random() * cities.length)
+
+        }
+
+        start()
+
+
+        // 1초씩 감소하는 로직
+
+        id = setInterval(() => {
+            quizTime.innerText = `Left Time : ${leftTime--}`
+            //leftTime이 0이 됬을때  
+            if (leftTime === -1) {
+                quizTime.innerText = "Time Over"
+                clearInterval(id)
+                answerForm.removeEventListener('keyup', keyupHandler)
+            }
+
+        }, 1000);
+
+
+        //quizWords에 랜덤으로 문제 출력
+        quizWords.innerText = cities[random]
+
+        // answerForm입력에 관한 함수
+        function keyupHandler() {
+
+
+            if (answerForm.value === cities[random]) {
+                scoreForm.innerText = `Score : ${++score}`
+
+                start()
+                quizWords.innerText = cities[random]
+                leftTime = 10
+                answerForm.value = ""
+            }
+        }
+
+        answerForm.addEventListener('keyup', keyupHandler)
+    </script>
+</body>
+
+</html>
