@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>>>Color Game</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding-top: 40px;      
+     }
+
+     p {
+         font-size: 1.5rem;
+         font-weight: bolder;
+         font-family: 'Noto Sans KR', sans-serif;
+     }
+
+     #blockSpace {
+         height: 600px;
+         width: 600px;
+         border: 0.1rem solid black;
+         display: grid;
+         grid-template-columns: repeat(2,1fr);
+     }
+
+     #blockSpace div {
+         height: 300px;
+         width: 300px;
+         border: 0.1rem solid black;
+     }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <p id ="score">Score : 0</p>
+        <p id ="life">Life : 10</p>
+
+        <div id="blockSpace">
+
+        </div>
+        <script>
+            const scoreSpace = document.getElementById("score")
+            const lifeSpace = document.getElementById("life")
+            const colorSpace = document.getElementById("blockSpace")
+            let plus = 2
+            let score = 0
+            let life = 0
+            let otherColor = Math.floor(Math.random()*Math.pow(plus,2))
+            
+            //칸이 늘어나는 함수
+
+            function start (){
+                colorSpace.innerHTML = ""
+                colorSpace.style.gridTemplateColumns = `repeat(${plus}, 1fr)`
+
+                const R = Math.floor(Math.random()*256)
+                const G = Math.floor(Math.random()*256)
+                const B = Math.floor(Math.random()*256)
+
+                for(let i = 0;i<Math.pow(plus,2);i++){
+                    const div = document.createElement("div")
+                    div.style.height = `${600/plus}px`
+                    div.style.width = `${600/plus}px`
+                    div.style.border = "1px solid black"
+                    div.style.backgroundColor = `rgb(${R},${G},${B})`
+
+                    if(i===otherColor){
+                        div.style.opacity = 0.9
+                    }
+
+                    colorSpace.appendChild(div)
+                }
+                plus++
+            }
+
+            //클릭한 블럭의 정답여부 확인할 리스너 이벤트
+            colorSpace.addEventListener("click",function(e){
+
+                //how to catch a diffrent block?
+                if(e.target.style.opacity === "0.9"){
+                    scoreSpace.innerHTML = `Score : ${++score}`
+                    start()
+                    otherColor = Math.floor(Math.random()*Math.pow(plus,2))
+                }else {
+                    lifeSpace.innerHTML = `Life : ${--life}`
+                }
+            })
+            start()
+
+
+
+        </script>
+    </div>
+</body>
+</html>

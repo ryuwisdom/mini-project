@@ -51,6 +51,24 @@
         </div>
     </div>
     <script>
+        //color picker game 설계
+    
+        //game-rule : 컬러블럭 중 다른 컬러를 가진 블럭을 클릭하면 통과
+        //통과하면 다음 새로운 블럭이 나타난다.
+    
+        //블럭 관련
+        //1. 블럭만들기(컬러 순서는 랜덤, 전체 블럭이 차지하는 공간은 동일)
+        //2. 5번 기준으로 블럭 개수가 좌우 1칸씩 증가 
+        //3. 다른색상 컬러를 클릭하면 score 1 증가, 새로운 게임 생성
+        //정답이 아닌 컬러를 클릭하면 life가 1 감소
+        //4. life가 1에서 0이 될때 game over 메시지 뜸
+    
+    
+        //컬러 지정 관련 
+        //해당공간 컬러 변화는 랜덤
+        //답의 컬러는 랜덤으로 나타남(주변컬러 대비 컬러가 미세히 다름)
+
+
         const colorSpace = document.getElementById("colorBlockForm")
         const scoreSpace = document.getElementById("score")
         const lifeSpace = document.getElementById("life")
@@ -60,7 +78,6 @@
         let diffrentColor = Math.floor(Math.random() * Math.pow(plus, 2))
 
 
-        //함수가 실행될때 칸이 한칸씩 늘어나고 크기가 칸의 수만큼 비례하여 감소 
         function start() {
             
             colorSpace.innerHTML = ""
@@ -90,7 +107,7 @@
 
         colorSpace.addEventListener("click", function (e) {
             //클릭한 블럭이 정답인지 아닌지
-            //클릭한 대상의 opacity가 0.9
+            //클릭한 대상의 opacity가 0.9 이면
             if (e.target.style.opacity === "0.9") {
 
                 scoreSpace.innerHTML = `Score : ${++score}`
@@ -107,22 +124,6 @@
 
 
 
-        //다른 색상블럭 맞추기 게임 설계
-
-        //게임방법 : 컬러블럭 중 다른 컬러를 가진 블럭을 클릭하면 통과
-        //통과하면 다음 새로운 블럭이 나타난다.
-
-        //블럭 관련
-        //1. 블럭만들기(컬러 순서는 랜덤, 전체 블럭이 차지하는 공간은 동일)
-        //2. 5번 기준으로 블럭 개수가 좌우 1칸씩 증가 
-        //3. 다른색상 컬러를 클릭하면 score 1 증가, 새로운 게임 생성
-        //정답이 아닌 컬러를 클릭하면 life가 1 감소
-        //4. life가 1에서 0이 될때 game over 메시지 뜸
-
-
-        //컬러 지정 관련 
-        //해당공간 컬러 변화는 랜덤
-        //답의 컬러는 랜덤으로 나타남(주변컬러 대비 컬러가 미세히 다름)
     </script>
 </body>
 
