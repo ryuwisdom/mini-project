@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>>>typingGame</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
 
     <style>
         body {
@@ -16,6 +17,7 @@
             font-family: 'Noto Sans KR', sans-serif;
 
         }
+
         .container {
             display: flex;
             flex-direction: column;
@@ -56,7 +58,7 @@
 
         <h1 id="quiz"></h1>
         <small id="time"></small>
-        <input type="text" id="answerForm">
+        <input type="text" id="answerForm" placeholder="Start typing" autofocus>
         <p id="scoreForm">Score : 0</p>
 
     </div>
@@ -66,38 +68,74 @@
         const quizTime = document.getElementById("time")
         const answerForm = document.getElementById("answerForm")
         const scoreForm = document.getElementById("scoreForm")
-        const cities = ["seoul", "tokyo", "newyork", "mexicocity", "hongkong", "havana", "melbourne", "manila"]
+        const cities = []
         let random = 0;
         let leftTime = 10;
         let id = 0;
         let score = 0;
+        const url = "http://13.124.251.164:3000"
+
+
+
+        //axios -  api사용하여 cityName 불러오기
+        async function getWords() {
+
+            await axios.get(url).then((res) => {
+                // res.data.forEach((word) => {
+                //    console.log(res.data);
+                // });
+
+                // console.log(res.data[0]);
+
+                for (const iterator of res.data) {
+                    console.log(iterator.cityName);
+
+                    cities.push(iterator.cityName)
+                }
+
+
+                start()
+
+                id = setInterval(() => {
+                    quizTime.innerText = `Left Time : ${leftTime--}`
+                    //leftTime이 0이 됬을때  
+                    if (leftTime === -1) {
+                        quizTime.innerText = "Time Over"
+                        clearInterval(id)
+                        answerForm.removeEventListener('keyup', keyupHandler)
+                    }
+
+                }, 1000);
+
+                quizWords.innerText = cities[random]
+
+
+            }).catch((err) => {
+                console.log(err);
+            })
+
+        }
 
 
         // city 배열이 랜덤하게 나오는 함수 로직
+
         function start() {
             random = Math.floor(Math.random() * cities.length)
 
         }
 
-        start()
+
+
+
+        getWords()
+
 
 
         // 1초씩 감소하는 로직
 
-        id = setInterval(() => {
-            quizTime.innerText = `Left Time : ${leftTime--}`
-            //leftTime이 0이 됬을때  
-            if (leftTime === -1) {
-                quizTime.innerText = "Time Over"
-                clearInterval(id)
-                answerForm.removeEventListener('keyup', keyupHandler)
-            }
-
-        }, 1000);
 
 
         //quizWords에 랜덤으로 문제 출력
-        quizWords.innerText = cities[random]
 
         // answerForm입력에 관한 함수
         function keyupHandler() {

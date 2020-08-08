@@ -19,5 +19,8 @@
   "devDependencies": {
     "html-webpack-link-type-plugin": "^1.0.3",
     "marked": "^1.1.1"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
   }
 }
