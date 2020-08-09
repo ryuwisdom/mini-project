@@ -35,7 +35,7 @@
     .drum_image {
         height: 500px;
         width: 750px;
-        padding-top: 260px;
+        padding-top: 300px;
         padding-left: 200px;
         z-index: 2;
     }
@@ -54,10 +54,11 @@
     .spotlight_img_L img{
         height: 300px;
         width: 300px;
-        animation-name: left;
+        animation: left 2s 1s infinite alternate;
+        /* animation-name: left;
         animation-delay: 1s;
         animation-duration: 3s;
-        animation-iteration-count: infinite;
+        animation-iteration-count: infinite; */
         transition-property: all;
         transition-timing-function: ease-in-out;
         transition: 1.2s;
@@ -67,17 +68,18 @@
         height: 300px;
         width: 300px;
         transform: rotate(90deg);
-        animation-name: right;
+        animation: right 2s 1s infinite alternate;
+        /* animation-name: right;
         animation-delay: 2s;
         animation-duration: 4s;
-        animation-iteration-count: infinite;
+        animation-iteration-count: infinite; */
         transition-property: all;
         transition: 1.2s;
         transition-timing-function: ease-in-out;
     }
     @keyframes left {
         from{
-            transform: rotate(5deg);
+            transform: rotate(10deg);
             transition: 1.5s;
     }
         to{
@@ -87,10 +89,10 @@
      }
     @keyframes right {
         from{
-            transform: rotate(95deg);
+            transform: rotate(85deg);
     }
         to{
-            transform: rotate(85deg);
+            transform: rotate(100deg);
         }
      }
     
@@ -100,8 +102,8 @@
         height: 550px;
         width: 500px;
         position: absolute;
-        right: 680px;
-        bottom: 320px;
+        right: 660px;
+        bottom: 280px;
         z-index: -1;
     }
 
