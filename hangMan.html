@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hackMan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: whitesmoke;
+        }
+
+        #container {
+            width: 100%;
+            height: 700px;
+            /* border: 1px dotted gray; */
+            background: whitesmoke;
+
+        }
+
+        .card-box {
+            width: 100%;
+            height: 500px;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            /* border: 1px dotted gray; */
+
+        }
+
+        .card-box > div{
+            width: 100%;
+            height: inherit;
+            justify-content: center;
+        }
+
+        #letter-number {
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            width: 100%;
+            color: navy;
+            /* font-weight: 700; */
+            text-align: center;
+            font-weight: bold;
+            line-height: 50px;
+            font-size: 25px;
+            /* padding-bottom: 100px; */
+
+        }
+
+        @-webkit-keyframes div {
+            100% {
+                top: -12px;
+                right: -12px;
+                bottom: -12px;
+                left: -12px;
+                opacity: 0;
+            }
+        }
+
+        @keyframes div {
+            100% {
+                top: -12px;
+                right: -12px;
+                bottom: -12px;
+                left: -12px;
+                opacity: 0;
+            }
+        }
+
+        .card-box div {
+            display: inline-block;
+            vertical-align: middle;
+            -webkit-transform: perspective(1px) translateZ(0);
+            transform: perspective(1px) translateZ(0);
+            /* box-shadow: 0 0 1px rgba(0, 0, 0, 0); */
+            position: relative;
+        }
+
+        .card-box div:before {
+            content: '';
+            position: absolute;
+            border: solid 3px;
+            border-radius: 10px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+        }
+
+        .card-box div:hover:before,
+        .card-box div:focus:before,
+        .card-box div:active:before {
+            -webkit-animation-name: div;
+            animation-name: div;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div class="card-box">
+            <div></div>
+            <div></div>
+        </div>
+
+        <div id="letter-number">
+
+        </div>
+    </div>
+
+    <script>
+        //hackMan Game
+        const key = document.createElement("keys")
+        const cardBox = document.getElementsByClassName("card-box")[0]
+        const quizDisplay = document.getElementById("letter-number")
+        const outer = document.getElementById("container")
+        
+
+        const alpahbet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
+            "T", "U", "V", "W", "S", "X", "Y", "Z"
+        ]
+        const quizResults = ["VUE", "PYTHON", "JAVASCRIPT", "REACT", "GIT"]
+        // const quizResults = ["JAAAAAA"]
+        let random = Math.floor(Math.random() * quizResults.length)
+
+        console.log(quizResults[random].length);
+
+        let i = 0
+        let secondResults = []
+        let counter = quizResults[random].length;
+
+        function gameKey() {
+
+            cardBox.firstElementChild.innerHTML = ""
+            cardBox.lastElementChild.innerHTML = ""
+
+            for (let i = 0; i < Math.floor(alpahbet.length/2); i++) {
+
+
+                const div = document.createElement("div")
+                div.style.width = "50px";
+                div.style.height = "50px";
+                div.style.lineHeight = "50px";
+                div.style.border = "none";
+                div.style.margin = "5px";
+                div.style.textAlign = "center";
+                div.style.borderRadius = "10px";
+                div.style.backgroundColor = "navy";
+                div.style.color = "white";
+                div.style.fontSize = "2rem";
+
+                div.innerText = `${alpahbet[i]}`;
+
+
+                cardBox.firstElementChild.appendChild(div)
+
+            }
+            for (let i = Math.floor(alpahbet.length/2); i < alpahbet.length; i++) {
+
+
+                const div = document.createElement("div")
+                div.style.width = "50px";
+                div.style.height = "50px";
+                div.style.lineHeight = "50px";
+                div.style.border = "none";
+                div.style.margin = "5px";
+                div.style.textAlign = "center";
+                div.style.borderRadius = "10px";
+                div.style.backgroundColor = "navy";
+                div.style.color = "white";
+                div.style.fontSize = "2rem";
+
+                div.innerText = `${alpahbet[i]}`;
+
+
+                cardBox.lastElementChild.appendChild(div)
+
+            }
+
+        }
+
+        gameKey()
+
+        //문제 랜덤 출제 함수
+        // function quiz () {
+        //     random   
+        //     for (let index = 0; index < quizResults[random].length; index++) {
+        //         quizDisplay.innerHTML += "_&nbsp;"
+
+        //     }
+        // }
+        // quiz()
+
+
+
+        for (let index = 0; index < quizResults[random].length; index++) {
+
+
+            const div = document.createElement("div")
+            div.style.width = "50px";
+            div.style.height = "50px";
+            div.style.borderBottom = "3px solid navy"
+            div.style.marginRight = "10px"
+            quizDisplay.appendChild(div)
+
+            secondResults.push(div)
+        }
+
+        // secondResults[1].innerText = "A"
+        // console.log(secondResults);
+
+
+        console.log(quizResults[random]);
+        // 문자 A를 출제된 문제의 언더바에 출력하기
+        // A값 키를 눌렀을때 찍히기
+
+
+
+        //클릭했을때 키버튼 값 출력
+        cardBox.addEventListener("click", function (e) {
+
+            if (e.target === cardBox) {
+                return
+            }
+
+            // console.log(quizResults[random]);
+
+            //quizResults배열에서 indexOf괄호의 값이 있다면 index 반환 없으면 -1반환
+            //  값인 react에서 indexOf괄호의 값이 있다면 index 반환 없으면 -1반환
+            // console.log(quizResults[random].indexOf(e.target.innerText))
+
+            if (quizResults[random].indexOf(e.target.innerText) === -1) {
+                // 대충 여기 틀렸을 때 로직이 들어가야함
+            } else {
+
+                // 대충 맞은 로직 여기다가
+
+                // ex) R을 누르면 R이 몇번째인지 출력
+                // console.log(e.target.innerText);
+                // secondResults.indexOf(e.target.innerText) 
+                // secondResults[quizResults[random].indexOf(e.target.innerText)].innerText = e.target.innerText
+                let a = -1
+
+                while (true) {
+
+                    a = quizResults[random].indexOf(`${e.target.innerText}`, a + 1)
+                    if (a === -1) break
+
+                    secondResults[a].innerText = e.target.innerText
+                    counter -= 1;
+                }
+
+
+
+
+
+
+            }
+            //누른 키가 사라지는 로직
+            e.target.style.visibility = "hidden";
+
+            if (counter === 0) {
+
+                random = Math.floor(Math.random() * quizResults.length)
+                counter = quizResults[random].length;
+                console.log(quizResults[random]);
+
+
+                gameKey()
+                quizDisplay.innerHTML = ""
+                secondResults = []
+
+                for (let index = 0; index < quizResults[random].length; index++) {
+
+
+                    const div = document.createElement("div")
+                    div.style.width = "50px";
+                    div.style.height = "50px";
+                    div.style.borderBottom = "3px solid navy"
+                    div.style.marginRight = "10px"
+                    quizDisplay.appendChild(div)
+
+                    secondResults.push(div)
+                }
+
+
+
+            }
+            //정답의 문자수만큼 underBar가 letter-number에 나타나게 하는 로직
+            // quizDisplay.innerText = quizResults[random].replace("quizResults[random]","")
+            // quizDisplay.innerText = quizResults[random].length.innerText =
+
+            //정해진 공간에 문자수만큼 언더바 찍어주기
+            // quizDisplay.innerText = quizResults[random].length
+            // for (let index = 0; index < quizResults[random].length; index++) {
+            //     quizDisplay.innerHTML += "_&nbsp;"
+
+            // }
+
+            // while(i<quizResults[random].length){
+            //     quizDisplay.innerHTML += "_&nbsp;"
+            //     i++
+            // }
+            // console.log(quizResults[random].length)
+
+
+        })
+
+
+
+        //키를 누를때마다 문제를 다시 생성 
+        //클릭할때마다 랜덤 문제 출제
+        document.addEventListener("click", function (e) {
+
+            //    quizDisplay.innerHTML = ""
+            //     //   quizDisplay.innerText = quizResults[random]
+            //     random = Math.floor(Math.random()*quizResults.length) 
+            //     console.log(quizResults[random]);
+
+            //       for (let index = 0; index < quizResults[random].length; index++) {
+            //       quizDisplay.innerHTML += "_&nbsp;"
+
+            //     }               
+
+            //예) 키 T를 눌렀을때 현재 문제(python)의 몇번째 인덱스인지 출력
+            //     document.addEventListener("click",function(e){
+
+
+            //     console.log(quizResults.indexOf(e.target.innerText))
+            //     })
+
+
+
+        })
+    </script>
+</body>
+
+</html>
