@@ -177,7 +177,7 @@
                 cardBox.firstElementChild.appendChild(div)
 
             }
-            
+
             for (let i = Math.floor(alpahbet.length / 2); i < alpahbet.length; i++) {
 
 
@@ -299,6 +299,7 @@
             //누른 키가 사라지는 로직
             e.target.style.visibility = "hidden";
 
+            // 랜덤한 정답의 길이가 0이
             if (counter === 0) {
 
                 random = Math.floor(Math.random() * quizResults.length)
@@ -356,7 +357,7 @@
 
         //키를 누를때마다 문제를 다시 생성 
         //클릭할때마다 랜덤 문제 출제
-        document.addEventListener("click", function (e) {
+        //document.addEventListener("click", function (e) {
 
             //    quizDisplay.innerHTML = ""
             //     //   quizDisplay.innerText = quizResults[random]
@@ -377,7 +378,7 @@
 
 
 
-        })
+        //})
     </script>
 </body>
 
