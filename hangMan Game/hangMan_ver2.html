@@ -1,10 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hangMan</title>
+
+    <style>
+        * {
+            margin: 0;
+            height: 0;
+        }
+
+        #container {
+            width: 100%;
+            height: 100vh;
+            background-color: powderblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        #buttonPlace {
+            display: flex;
+            /* 창에맞추어 정렬되는 속성이 뭐더라..? */
+            justify-content: center;
+            align-items: center;
+        }
+
+        #resultSpace {
+            height: 100px;
+            width: 100%;
+        }
+    </style>
 </head>
+
 <body>
     <div id="container">
         <div id="buttonPlace">
@@ -37,24 +68,177 @@
         const outer = document.getElementById("container")
         const buttonPlace = document.getElementById("buttonPlace")
         const resultSpace = document.getElementById("resultSpace")
-        const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-        const answer = ["black", "white", "gray", "silver", "maroon", "red", "purple", "fushsia", "green", "lime", "olive", "yellow", "navy", "blue", "teal","aqua"]
-    
-    
+        const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
+            "t", "u", "v", "w", "x", "y", "z"
+        ]
+        const answer = ["black", "white", "gray", "silver", "maroon", "red", "purple", "fushsia", "green", "lime",
+            "olive", "yellow", "navy", "blue", "teal", "aqua"
+        ]
+        
+        // pushedKeyValue배열 생성이유 : 1) 누른 키가 입력되는 공간/입력값과 정답 매칭확인 위함
+        let pushedKeyValue = []
+        let i = 0
+        let quizChange = Math.floor(Math.random() * answer.length)
+
+        // 랜덤한 문제의 길이를 변수로 지정
+        // 생성이유 :  정답을 다 입력했을때를 알기위함 
+        let counter = answer[quizChange].length;
+
+        // alphabet.toUpperCase();
+
         //키 생성 함수
-        function makeKey (){
+        function keyMaking() {
 
-            for(let i = 0;i<alphabet.length;i++){
+            outer.innerHTML = ""
 
-                
+            //프로그램 시작시(첫화면) 키 생성 for문
 
+            //알파벳 배열의 길이만큼 생성
+            for (let i = 0; i < alphabet.length; i++) {
+                const keyButton = document.createElement("div")
+                keyButton.style.width = "40px";
+                keyButton.style.height = "40px";
+                keyButton.style.lineHeight = "40px";
+                keyButton.style.border = "none";
+                keyButton.style.margin = "5px";
+                keyButton.style.textAlign = "center";
+                keyButton.style.borderRadius = "50%";
+                keyButton.style.backgroundColor = "tomato";
+                keyButton.style.color = "white";
+                keyButton.style.fontSize = "1.6rem";
+                keyButton.style.fontWeight = "700";
+
+                // alpahbet배열 -> 대문자 뱐환 method
+
+                // div태그로 만들어진 keyButton안에 alpahbet text 넣기
+                keyButton.innerText = `${alphabet[i]}`
+
+                // buttonPlace에 만들어진 keyButton요소 추가하기
+                buttonPlace.appendChild(keyButton)
+
+            }
+
+        }
+
+        keyMaking()
+
+        // 문제를 랜덤하게 바꾸는 함수
+        function quizChanging() {
+            quizChange
+        }
+        quizChanging()
+
+
+        // 문제의 문자수 만큼의 칸 생성하는 함수
+        function quizShowing() {
+
+
+            // 랜덤으로 나오는 문제의 문자길이 만큼 칸 생성
+            for (let i = 0; i < answer[quizChange].length; i++) {
+                const quizBlock = document.createElement("div")
+                quizBlock.style.width = "40px";
+                quizBlock.style.height = "40px";
+                quizBlock.style.color = "white";
+                quizBlock.style.fontSize = "1.6rem";
+                quizBlock.style.fontWeight = "700";
+                quizBlock.style.borderBottom = "3px solid tomato";
+
+                //  
+                // resultSpace에 div로 생성된 quizBlock요소 추가
+                resultSpace.appendChild(quizBlock)
+
+                // 배열에 추가
+                // pushedKeyValue 배열에 div로 생성된 quizBlock요소 추가 
+                pushedKeyValue.push(quizBlock)
             }
         }
 
-    
-    
-    
-    
+        // 콘솔에 정답 출력해주기
+        console.log(answer[quizChange]);
+
+        //bubbling
+        // arphabet 키를 클릭했을때 정답여부 확인 이벤트 
+        outer.addEventListener("click", function (e) {
+
+
+            // alphabet 키가 아닌 buttonPlace키를 눌렀을때 return
+            if (e.target === buttonPlace) {
+                return
+            }
+
+            // 랜덤 문제에서 indexOf의 결과가 -1이 나온다면 
+            if (answer[quizChange].indexOf(e.target.innerText) === -1) {
+                // 땡!
+            } else {
+                // 딩동댕!
+
+                // a가 -1 인 이유는 0번째 index부터 check하기위함 
+                let a = -1;
+
+                // 한 문제에 같은 문자가 한 개 이상일 경우 동시에 채워주는 로직
+                while(true) {
+                    // while문은 true일때 모두 성립 
+                    a = answer[quizChange].indexOf(`${e.target.innerText}`, a + 1);
+
+                    // a = -1인 경우는 찾는 값(문자)가 더이상 없음을 의미
+                    if (a === -1) break;
+
+                    // 중복되는 문자가 다 채워질때까지 
+                    // pushedKeyValue배열의 [a]번째에 클릭한 값이 들어감
+                    pushedKeyValue[a].innerText = e.target.innerText;
+
+                    // 랜덤한 정답의 길이가 하나씩 감소
+                    // 칸이 하나씩 채워질때마다 랜덤한 정답의 길이가 하나씩 감소
+                    counter -= 1;
+
+                }
+                
+                
+            }
+                // 클릭한 alpahbet 키 사라지는 로직
+                e.target.style.visibility = "hidden";
+
+                // 랜덤한 정답의 길이가 0이 될때 = 정답을 다 입력했을때의 조치 로직
+                if(counter === 0){
+
+                    //문제 바꿔줌
+                    quizChange = Math.floor(Math.random() * answer.length)
+                    //문제길이 초기화
+                    counter = answer[quizChange].length;
+                    //새로운 정답 콘솔출력
+                    console.log(answer[quizChange]);
+
+                    //alphabet 키 새로 생성
+                    keyMaking()
+
+                    //정답 입력창 초기화
+                    resultSpace.innerHTML = ""
+                    //pushedKeyValue 배열 초기화
+                    pushedKeyValue = []
+
+
+                    // 새로생성된 정답이 입력될 block 생성
+                    for (let i = 0; i < answer[quizChange].length; i++) {
+                    const quizBlock = document.createElement("div")
+                    quizBlock.style.width = "40px";
+                    quizBlock.style.height = "40px";
+                    quizBlock.style.color = "white";
+                    quizBlock.style.fontSize = "1.6rem";
+                    quizBlock.style.fontWeight = "700";
+                    quizBlock.style.borderBottom = "3px solid tomato";
+
+        
+                    resultSpace.appendChild(quizBlock)
+
+                  
+                    pushedKeyValue.push(quizBlock)
+                 }
+                }
+
+
+
+        })
     </script>
 </body>
+
 </html>
