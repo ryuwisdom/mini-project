@@ -44,9 +44,11 @@
 
         input {
             width: 350px;
-            height: 40px;
+            height: 50px;
             border-radius: 3px;
             border-style: none;
+            font-size: 1.5rem;
+            padding: 5px;
         }
     </style>
 
@@ -68,6 +70,7 @@
         const quizTime = document.getElementById("time")
         const answerForm = document.getElementById("answerForm")
         const scoreForm = document.getElementById("scoreForm")
+        const outer = document.getElementsByClassName("container")[0]
         const cities = []
         let random = 0;
         let leftTime = 10;
@@ -151,7 +154,7 @@
             }
         }
 
-        answerForm.addEventListener('keyup', keyupHandler)
+        outer.addEventListener('keyup', keyupHandler)
     </script>
 </body>
 

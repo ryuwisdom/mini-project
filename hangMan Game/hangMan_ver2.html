@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hangMan</title>
+</head>
+<body>
+    <div id="container">
+        <div id="buttonPlace">
+            <div></div>
+            <div></div>
+        </div>
+
+        <div class="resultSpace">
+
+        </div>
+
+
+
+
+    </div>
+    <script>
+        // hangMan Game 설계
+        // html - 키버튼, 문제출제 공간 
+
+        // script -
+        // 1) 알파벳 키 생성/문제 배열 생성
+        // 1-1) 알파벳 키 클릭하면 사라짐
+        // 2) 문제출제 함수 
+        //    배열의 문제가 랜덤으로 나오는 함수(clg로)
+        // 3) 문제의 문자길이만큼 입력칸이 화면에 출력되는 함수
+        // 4) 누른 키의 (정답내 문자)포함여부 가리는 조건문
+        // 5) 정답인 문자를 다 입력했을때 실행할 함수
+
+
+        const outer = document.getElementById("container")
+        const buttonPlace = document.getElementById("buttonPlace")
+        const resultSpace = document.getElementById("resultSpace")
+        const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+        const answer = ["black", "white", "gray", "silver", "maroon", "red", "purple", "fushsia", "green", "lime", "olive", "yellow", "navy", "blue", "teal","aqua"]
+    
+    
+        //키 생성 함수
+        function makeKey (){
+
+            for(let i = 0;i<alphabet.length;i++){
+
+                
+
+            }
+        }
+
+    
+    
+    
+    
+    </script>
+</body>
+</html>

@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hackMan</title>
+    <title>hangMan</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Kalam:wght@400;700&family=Pacifico&family=Shadows+Into+Light&family=Sriracha&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -13,104 +15,110 @@
         }
 
         body {
-            background: whitesmoke;
+            background: #f69e7b;
         }
 
         #container {
             width: 100%;
             height: 700px;
-            /* border: 1px dotted gray; */
-            background: whitesmoke;
+            background: #f69e7b;
 
         }
 
         .card-box {
             width: 100%;
-            height: 500px;
+            height: 450px;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: center;
             align-items: center;
-            /* border: 1px dotted gray; */
-
+            flex-direction: column;
         }
 
-        .card-box > div{
+        .card-box>div {
             width: 100%;
-            height: inherit;
+            display: flex;
             justify-content: center;
+
         }
 
         #letter-number {
             display: flex;
             justify-content: center;
-            /* align-items: center; */
             width: 100%;
-            color: navy;
-            /* font-weight: 700; */
+            color: #383e56;
             text-align: center;
             font-weight: bold;
             line-height: 50px;
             font-size: 25px;
-            /* padding-bottom: 100px; */
-
         }
 
         @-webkit-keyframes div {
+            50% {
+                -webkit-transform: scale(0.8);
+                transform: scale(0.8);
+            }
+
             100% {
-                top: -12px;
-                right: -12px;
-                bottom: -12px;
-                left: -12px;
-                opacity: 0;
+                -webkit-transform: scale(1);
+                transform: scale(1);
             }
         }
 
         @keyframes div {
+            50% {
+                -webkit-transform: scale(0.8);
+                transform: scale(0.8);
+            }
+
             100% {
-                top: -12px;
-                right: -12px;
-                bottom: -12px;
-                left: -12px;
-                opacity: 0;
+                -webkit-transform: scale(1);
+                transform: scale(1);
             }
         }
 
-        .card-box div {
+        .card-box div>div {
             display: inline-block;
             vertical-align: middle;
             -webkit-transform: perspective(1px) translateZ(0);
             transform: perspective(1px) translateZ(0);
-            /* box-shadow: 0 0 1px rgba(0, 0, 0, 0); */
-            position: relative;
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0);
         }
 
-        .card-box div:before {
-            content: '';
-            position: absolute;
-            border: solid 3px;
-            border-radius: 10px;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            -webkit-animation-duration: 1s;
-            animation-duration: 1s;
-        }
-
-        .card-box div:hover:before,
-        .card-box div:focus:before,
-        .card-box div:active:before {
+        .card-box div>div:hover,
+        .card-box div>div:focus,
+        .card-box div>div:active {
             -webkit-animation-name: div;
             animation-name: div;
+            -webkit-animation-duration: .5s;
+            animation-duration: .5s;
+            -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+            -webkit-animation-iteration-count: 1;
+            animation-iteration-count: 1;
+        }
+
+        h1 {
+            color: navy;
+            font-size: 4rem;
+            letter-spacing: 5px;
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            font-style: italic;
+            /* font-family: 'Kalam', cursive; */
+            font-family: 'Shadows Into Light', cursive;
+            /* font-family: 'Sriracha', cursive; */
+            /* letter-spacing: 2px; */
         }
     </style>
 </head>
 
 <body>
     <div id="container">
+        <h1>HANGMAN</h1>
         <div class="card-box">
-            <div></div>
-            <div></div>
+            <div id="div1"></div>
+            <div id="div2"></div>
         </div>
 
         <div id="letter-number">
@@ -124,13 +132,15 @@
         const cardBox = document.getElementsByClassName("card-box")[0]
         const quizDisplay = document.getElementById("letter-number")
         const outer = document.getElementById("container")
-        
+        const div1 = document.getElementById("div1")
+        const div2 = document.getElementById("div2")
 
         const alpahbet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
             "T", "U", "V", "W", "S", "X", "Y", "Z"
         ]
         const quizResults = ["VUE", "PYTHON", "JAVASCRIPT", "REACT", "GIT"]
         // const quizResults = ["JAAAAAA"]
+
         let random = Math.floor(Math.random() * quizResults.length)
 
         console.log(quizResults[random].length);
@@ -144,20 +154,22 @@
             cardBox.firstElementChild.innerHTML = ""
             cardBox.lastElementChild.innerHTML = ""
 
-            for (let i = 0; i < Math.floor(alpahbet.length/2); i++) {
+            for (let i = 0; i < Math.floor(alpahbet.length / 2); i++) {
 
 
                 const div = document.createElement("div")
-                div.style.width = "50px";
-                div.style.height = "50px";
-                div.style.lineHeight = "50px";
+                div.style.width = "55px";
+                div.style.height = "55px";
+                div.style.lineHeight = "55px";
                 div.style.border = "none";
                 div.style.margin = "5px";
                 div.style.textAlign = "center";
                 div.style.borderRadius = "10px";
-                div.style.backgroundColor = "navy";
-                div.style.color = "white";
-                div.style.fontSize = "2rem";
+                div.style.backgroundColor = "#eedad1";
+                // div.style.color = "#383e56";
+                div.style.color = "navy";
+                div.style.fontSize = "3rem";
+                div.style.fontWeight = "700";
 
                 div.innerText = `${alpahbet[i]}`;
 
@@ -165,20 +177,23 @@
                 cardBox.firstElementChild.appendChild(div)
 
             }
-            for (let i = Math.floor(alpahbet.length/2); i < alpahbet.length; i++) {
+            for (let i = Math.floor(alpahbet.length / 2); i < alpahbet.length; i++) {
 
 
                 const div = document.createElement("div")
-                div.style.width = "50px";
-                div.style.height = "50px";
-                div.style.lineHeight = "50px";
+                div.style.width = "55px";
+                div.style.height = "55px";
+                div.style.lineHeight = "55px";
                 div.style.border = "none";
                 div.style.margin = "5px";
                 div.style.textAlign = "center";
                 div.style.borderRadius = "10px";
-                div.style.backgroundColor = "navy";
-                div.style.color = "white";
-                div.style.fontSize = "2rem";
+                div.style.backgroundColor = "#eedad1";
+                // div.style.color = "#383e56";
+                div.style.color = "navy";
+                div.style.fontSize = "3rem";
+                div.style.fontWeight = "700";
+
 
                 div.innerText = `${alpahbet[i]}`;
 
@@ -207,10 +222,16 @@
 
 
             const div = document.createElement("div")
-            div.style.width = "50px";
-            div.style.height = "50px";
-            div.style.borderBottom = "3px solid navy"
+            div.style.width = "55px";
+            div.style.height = "55px";
+            // div.style.borderBottom = "4px solid #383e56"
+            div.style.borderBottom = "4px solid navy"
             div.style.marginRight = "10px"
+            div.style.fontSize = "3rem";
+            div.style.fontWeight = "700";
+            div.style.color = "navy";
+
+
             quizDisplay.appendChild(div)
 
             secondResults.push(div)
@@ -226,12 +247,20 @@
 
 
 
-        //클릭했을때 키버튼 값 출력
+        // 클릭했을때 키버튼 값 출력
+        // bubbling 적용
         cardBox.addEventListener("click", function (e) {
+
 
             if (e.target === cardBox) {
                 return
+                
             }
+            // console.log(object);
+            if(e.target === div1 || e.target ===  div2) {
+                return
+            }
+            // e.stopPropagation();
 
             // console.log(quizResults[random]);
 
@@ -284,10 +313,16 @@
 
 
                     const div = document.createElement("div")
-                    div.style.width = "50px";
-                    div.style.height = "50px";
+                    div.style.width = "55px";
+                    div.style.height = "55px";
+                    // div.style.borderBottom = "3px solid #383e56"
                     div.style.borderBottom = "3px solid navy"
                     div.style.marginRight = "10px"
+                    div.style.fontWeight = "700";
+                    div.style.fontSize = "3rem";
+                    div.style.color = "#383e56";
+
+
                     quizDisplay.appendChild(div)
 
                     secondResults.push(div)
