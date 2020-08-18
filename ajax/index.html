@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>The XMLHttpRequest Object</h2>
+
+<p id="demo">Let AJAX change this text.</p>
+
+<button type="button" onclick="start()">Change Content</button>
+
+<script>
+
+    function start() {
+    const xmlHttp =new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function(){
+        if(xmlHttp.readyState == 4 && xmlHttp.status =="200"){
+            //대충 응답성공 로직
+
+            document.getElementById("demo").innerText = xmlHttp.responseText
+        }
+    }
+
+    xmlHttp.open("GET","http://192.168.56.1:8080/cat.txt",true)
+
+    xmlHttp.send();
+
+}
+</script>
+
+</body>
+</html>
