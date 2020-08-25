@@ -109,6 +109,7 @@
         let alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
             "t", "u", "v", "w", "x", "y", "z"
         ]
+
         alphabet = alphabet.map(function (x) {
             return x.toUpperCase()
         })
@@ -255,7 +256,7 @@
             // 클릭한 alpahbet 키 사라지는 로직
             e.target.style.visibility = "hidden";
 
-            // 랜덤한 정답의 길이가 0이 될때 = 정답을 다 입력했을때의 조치 로직
+            // 랜덤한 정답의 길이가 0이 될때 = 정답을 다 입력했을때의 조치 로직(초기화)
             if (counter === 0) {
 
                 //문제 바꿔줌
