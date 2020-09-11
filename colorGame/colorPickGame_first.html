@@ -11,7 +11,8 @@
         * {
             box-sizing: border-box;
         }
-        .container{
+
+        .container {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,6 +25,7 @@
             font-weight: bolder;
             font-family: 'Noto Sans KR', sans-serif;
         }
+
         #colorBlockForm {
             height: 600px;
             width: 600px;
@@ -52,18 +54,18 @@
     </div>
     <script>
         //color picker game 설계
-    
+
         //game-rule : 컬러블럭 중 다른 컬러를 가진 블럭을 클릭하면 통과
         //통과하면 다음 새로운 블럭이 나타난다.
-    
+
         //블럭 관련
         //1. 블럭만들기(컬러 순서는 랜덤, 전체 블럭이 차지하는 공간은 동일)
         //2. 5번 기준으로 블럭 개수가 좌우 1칸씩 증가 
         //3. 다른색상 컬러를 클릭하면 score 1 증가, 새로운 게임 생성
         //정답이 아닌 컬러를 클릭하면 life가 1 감소
         //4. life가 1에서 0이 될때 game over 메시지 뜸
-    
-    
+
+
         //컬러 지정 관련 
         //해당공간 컬러 변화는 랜덤
         //답의 컬러는 랜덤으로 나타남(주변컬러 대비 컬러가 미세히 다름)
@@ -78,8 +80,11 @@
         let diffrentColor = Math.floor(Math.random() * Math.pow(plus, 2))
 
 
+
+        // 새로운 컬러 및 칸을 생성하는 함수
         function start() {
-            
+
+
             colorSpace.innerHTML = ""
             colorSpace.style.gridTemplateColumns = ` repeat(${plus}, 1fr)`
 
@@ -99,31 +104,51 @@
                 }
 
                 colorSpace.appendChild(div)
-
             }
             plus++
-
         }
 
-        colorSpace.addEventListener("click", function (e) {
+
+        // 게임을 심판하는 함수
+        const clickHandler = function clickColor(e) {
             //클릭한 블럭이 정답인지 아닌지
             //클릭한 대상의 opacity가 0.9 이면
+
             if (e.target.style.opacity === "0.9") {
 
                 scoreSpace.innerHTML = `Score : ${++score}`
                 start()
                 diffrentColor = Math.floor(Math.random() * Math.pow(plus, 2))
-         
+
             } else {
+
                 lifeSpace.innerHTML = `Life : ${--life}`
+
+            }
+            if (life == 0) {
+                lifeSpace.innerHTML = "Game Over"
+                colorSpace.removeEventListener("click", clickHandler)
+                //addEventListener 구조 - target.addEventListener(type, listener(함수명));
+                
+
             }
 
-        })
+        }
+
         start()
 
+        colorSpace.addEventListener("click", clickHandler)
 
 
 
+
+
+
+
+
+        // life가 0이 되었을때 게임종료 텍스트 띄우기
+        // life가 0이 되었을때 life는 더이상 감소하면 안됨
+        // life가 0이 되었을때 게임도 더이상 진행되면 안됨
     </script>
 </body>
 
