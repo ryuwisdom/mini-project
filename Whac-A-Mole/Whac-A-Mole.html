@@ -7,120 +7,153 @@
     <title>Whac-A-Mole</title>
 
     <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            /* justify-content: center; */
+            align-items: center;
+            /* background-color: pink; */
 
+        }
     </style>
 </head>
 
-    <script>
-        //두더지(요소)만들고 초기화
-        function makeMoles(nx, ny) {
+<script>
+    //두더지(요소)만들고 초기화
+    function makeMoles(nx, ny) {
 
-            //Map 객체에 요소의 상태를 기록.Map 요소 자체가 키 값
-            let molesState = new Map();
-
-            //가로에 nx마리, 세로에 ny마리 두더지(div)를 생성하고 초기화
-            const W = 50,
-                SPACE = 10;
-              
-            for (let i = 0; i < nx; i++) {
-                for (let j = 0; j < ny; j++) {
-
-                    //요소생성
-                    const element = document.createElement("div");
-
-                    //요소 스타일 설정
-                    element.style.width = W + "px";
-                    element.style.height = W + "px";
-                    element.style.backgroundImage = "url(./clipart288482.png)";
-                    element.style.backgroundPosition = "center";
-                   element.style.backgroundSize = 'cover';
-                    element.style.position = "absolute";
-                    element.style.opacity = 0.2;
-
-                    element.style.zIndex = 10;
-                    element.style.transition = "transform .5s ease-in-out, opacity 0.5s ease";
-
-                    //Body의 노드목록에 추가
-                    document.body.appendChild(element);
-                    //요소배치
-                    element.style.left = SPACE + i * (W + SPACE) + "px";
-                    element.style.top = 2 * SPACE + j * (W + SPACE) + "px";
-
-                    //Map객체에 요소 상태 기록
-                    molesState.set(element, {
-                        x: i,
-                        y: j,
-                        opacity: 0.2
-                    });
-
-                    //클릭 이벤트 처리
-                    element.onclick = function clickEventHandler(e) {
-                        const element = e.currentTarget;
-                        const state = molesState.get(element);
-
-                        console.log(state);
-
-                        //클릭시 불투명도가 0.5이상이면 삭제
-                        if (state.opacity >= 0.5) {
-                            document.body.removeChild(element)
-                            molesState.delete(element)
-                        }
+        //Map 객체에 요소의 상태를 기록.Map 요소 자체가 키 값
+        let molesState = new Map();
 
 
+        // 개당 190 * 7 = 1330
+        //가로에 nx마리, 세로에 ny마리 두더지(div)를 생성하고 초기화
+        const W = 150,
+        SPACE = 20;
+
+        for (let i = 0; i < nx; i++) {
+            for (let j = 0; j < ny; j++) {
+
+                //요소생성
+                const element = document.createElement("div");
+
+                //요소 스타일 설정
+                element.style.width = W + "px";
+                element.style.height = W + "px";
+                element.style.backgroundImage = "url(./clipart288482.png)";
+                element.style.backgroundPosition = "center";
+                element.style.backgroundSize = 'cover';
+                element.style.position = "absolute";
+                element.style.opacity = 0.2;
+
+                element.style.zIndex = 10;
+                element.style.transition = "transform .5s ease-in-out, opacity 0.5s ease";
+
+                //Body의 노드목록에 추가
+                document.body.appendChild(element);
+                //요소배치
+
+                // Math.floor((window.screen.width - 1190) / 2)
+                element.style.left =  Math.floor((window.screen.width - 1190) / 2)+ SPACE + i * (W + SPACE) + "px";
+                // element.style.left = SPACE + i * (W + SPACE) + "px";
+                element.style.top = Math.floor((document.body.clientHeight - 760) / 2) + 2 * SPACE + j * (W + SPACE) + "px";
+                // element.style.top = 2 * SPACE + j * (W + SPACE) + "px";
+
+                //Map객체에 요소 상태 기록
+                molesState.set(element, {
+                    x: i,
+                    y: j,
+                    opacity: 0.2
+                });
+
+                //클릭 이벤트 처리
+                element.onclick = function clickEventHandler(e) {
+                    const element = e.currentTarget;
+                    const state = molesState.get(element);
+
+                    console.log(state);
+
+                    //클릭시 불투명도가 0.5이상이면 삭제
+                    if (state.opacity >= 0.5) {
+                        document.body.removeChild(element)
+                        molesState.delete(element)
                     }
+
 
                 }
 
             }
-            return molesState;
+
         }
+        return molesState;
+    }
 
-        window.onload = function () {
-            const TIME_INTERVAL = 1500,
-                DISPLAY_TIME = 1050;
+    window.onload = function () {
 
-            //두더지 생성
-            const molesState = makeMoles(7, 4);
+        const TIME_INTERVAL = 1500,
+            DISPLAY_TIME = 1050;
 
-            //일정한 간격으로 두더지 표시
-            //불투명도를 1로 바꾼 다음 위로 이동
+        //두더지 생성
+        const molesState = makeMoles(7, 4);
 
-            const timer = setInterval(function appearMole() {
+        //일정한 간격으로 두더지 표시
+        //불투명도를 1로 바꾼 다음 위로 이동
 
-                //두더지가 없어지면 게임 종료
-                if (molesState.size == 0) {
-                    clearInterval(timer);
-                    document.body.innerHTML = "game over";
-                    return;
-                }
+        const timer = setInterval(function appearMole() {
 
-                //두더지 무작위 선택
-                const n = Math.floor(Math.random()*molesState.size);
-                const elements = molesState.keys();
-                let count = 0
-                let element = null; 
-                for (element of elements) {
-                    if (count++ == n) break;
-                }
+            //두더지가 없어지면 게임 종료
+            if (molesState.size == 0) {
+                clearInterval(timer);
+                document.body.innerHTML = "game over";
+                return;
+            }
 
-                const state = molesState.get(element);
+            //두더지 무작위 선택
+            const n = Math.floor(Math.random() * molesState.size);
+            const elements = molesState.keys();
+            let count = 0
+            let element = null;
+            for (element of elements) {
+                if (count++ == n) break;
+            }
 
-                //두더지를 불투명도를 1로 변경, 위로 10px이동시켜서 표시
-                element.style.opacity = 1;
-                state.opacity = 1;
-                element.style.transform = "translateY(-10px)"
+            const state = molesState.get(element);
 
-                //일정 시간이 지나면 불투명도와 이동한 거리를 되돌린다.
-                setTimeout(function hideMole() {
-                    element.style.opacity = 0.2;
-                    state.opacity = 0.2;
-                    element.style.transform = "translateY(0)"
+            //두더지를 불투명도를 1로 변경, 위로 10px이동시켜서 표시
+            element.style.opacity = 1;
+            state.opacity = 1;
+            element.style.transform = "translateY(-10px)"
 
-                }, DISPLAY_TIME)
-            }, TIME_INTERVAL)
-        }
+            //일정 시간이 지나면 불투명도와 이동한 거리를 되돌린다.
+            setTimeout(function hideMole() {
+                element.style.opacity = 0.2;
+                state.opacity = 0.2;
+                element.style.transform = "translateY(0)"
+
+            }, DISPLAY_TIME)
+        }, TIME_INTERVAL)
+    }
+</script>
+
+<body id="body">
+
+
+    <!-- <div style="height: 1003px; width: 200px; background-color: black;"> -->
+<!-- aa -->
+    <!-- </d/iv> -->
+
+    <script>
+        // const body = document.getElementById('body');
+
+        console.log(document.body.clientHeight);
+        console.log(window.screen.width);
     </script>
-<body>
 </body>
 
 </html>
