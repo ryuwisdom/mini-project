@@ -1,11 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2d breakout game</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        canvas {
+            border: 3px solid deeppink;
+
+            /* margin: 0 auto; */
+        }
+
+        .canvas-container {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* border: 1px solid black; */
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div class="canvas-container">
+
+
+        <canvas id="myCanvas" width="500" height="500"></canvas>
+
+    </div>
+
+    <script>
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+
+
+
+
+        // 1초마다 y축이 1씩 증가힌다. 
+
+        let direction = 13;
+        let y = 100
+        setInterval(function () {
+
+            // canvas 지우기
+            ctx.clearRect(0, 0, 500, 500);
+
+
+                // canvas 다시그리기 
+                ctx.beginPath();
+                ctx.arc(100, y, 10, 0, Math.PI * 2, false);
+                ctx.fillStyle = "yellowGreen";
+                ctx.fill();
+                ctx.closePath();
+
+                y = y + direction;
+
+
+                if(y >=490) direction = -13;
+                if(y  <10) direction = +13;
+                // if(y == 500 )
+
+        }, 10)
+    </script>
 </body>
+
 </html>

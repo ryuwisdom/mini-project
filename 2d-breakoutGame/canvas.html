@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2d breakout game</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        canvas {
+            background: #ccc;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="myCanvas" width="480" height="320"></canvas>
+
+    <script>
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // 직사각형 그리기
+
+        // ctx.beginPath() : ctx로 정의한 path가  초기화되어 새로운 도형을 그릴 수 있음.
+        ctx.beginPath();
+
+        //  ctx.rect() : retangular 그리기
+        ctx.rect(20, 40, 100, 50);
+        ctx.fillStyle = "#FF0000";
+
+        // fill() : 채우기 색상 메사드
+        ctx.fill();
+
+        // ctx.closePath(); ctx(path)의 마지막 점과 시작점을 직선으로 연결하고 path 종료
+        ctx.closePath();
+
+
+        
+
+        // 초록 원 그리기
+
+        ctx.beginPath();
+
+        // arc() : ctx.arc(x, y, radius, startAngle, endAngle [, anticlockwise]);
+        ctx.arc(240, 160, 20, 0, Math.PI * 2, false);
+        ctx.fillStyle = "green";
+        ctx.fill();
+        ctx.closePath();
+
+
+          // 외곽선에 색상 채우기
+          ctx.beginPath();
+          ctx.rect(160,10,100,40);
+          ctx.strokeStyle = "rega(0,0,255,0.5)"
+          ctx.stroke();
+          ctx.closePath();
+    </script>
+</body>
+
+</html>
