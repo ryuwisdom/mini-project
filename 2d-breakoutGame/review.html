@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            border: 4px solid navy;
+        }
+
+        .canvas-container {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="canvas-container">
+        <canvas id="myCanvas" width="700" height="500"></canvas>
+    </div>
+    <script>
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+        const bar = canvas.getContext("2d");
+
+        let directionX = 1;
+        let directionY = 1;
+        let speed = 4;
+        let ballSize = 12;
+        const canvasWidth = 700;
+        const canvasHeight = 500;
+
+        let ballXPosition = 300;
+        let ballYPosition = 180;
+
+        let barXPosition = 1;
+        let barYPosition = canvasHeight - 25;
+        let barWidth = 100;
+        let barHeight = 14;
+        let barSpeed = 15;
+
+
+
+
+        setInterval(() => {
+
+            // Bar process
+
+            // key check
+            if (keyState[37]) {
+                // Bar position
+
+                if (barXPosition  <= directionX) {
+                   //아무것도 하지 않는다.(이동안함)
+                   barXPosition = barXPosition + barSpeed;
+                  
+                }
+
+                // 왼쪽키를 눌렀을때 bar의 현재 위치는 현재위치 - bar의 속도값으로 이동
+                barXPosition = barXPosition - barSpeed;
+
+            }
+
+
+            if (keyState[39]) {
+                // Bar position
+
+                if(barXPosition>canvasWidth-barWidth){
+                    //아무것도 하지 않는다.
+                    barXPosition = barXPosition - barSpeed;
+                    console.log(barXPosition);
+
+                }
+                barXPosition = barXPosition + barSpeed;
+            }
+
+            // bar collision process
+
+            // 움직인 후의 위치(예측)가 directionX(1)
+            // if (barXPosition - barSpeed >= barXPosition) barXPosition = barXPosition + barSpeed;
+            // if (barXPosition + barSpeed >= canvasWidth-barWidth) barXPosition = barXPosition - barSpeed;
+
+
+
+
+            // reset drawing
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+
+            // draw process
+
+            // draw a ball
+            ctx.beginPath();
+            ctx.arc(ballXPosition, ballYPosition, ballSize, 0, Math.PI * 2, false);
+            ctx.fillStyle = "navy";
+            ctx.fill();
+            ctx.closePath();
+
+            // draw a bar
+            bar.rect(barXPosition, barYPosition, barWidth, barHeight);
+            bar.fillStyle = "deepPink";
+            bar.fill();
+            bar.closePath();
+
+
+
+            // ball position
+            ballXPosition = ballXPosition + directionX * speed;
+            ballYPosition = ballYPosition + directionY * speed;
+
+            // collision process
+            if (canvasWidth - ballSize <= ballXPosition || ballXPosition < ballSize) directionX = -directionX;
+            if (canvasHeight - ballSize <= ballYPosition || ballYPosition < ballSize) directionY = -directionY;
+
+
+        }, 1000 / 60)
+
+        const keyState = {
+
+            37: false,
+            39: false
+
+        };
+        // 이벤트리스너는 전역에서 한 번 만 달면 된다.
+        // 루프에 포함시키지 않도록(루프에 넣게되면 이벤트가 계속 생성된다.)
+
+        window.addEventListener("keydown", (event) => {
+            const key = event.keyCode
+
+            // 키를 눌렀을 때 
+            if (key == 37) {
+                keyState[37] = true;
+            } else if (key == 39) {
+                keyState[39] = true;
+            }
+
+            console.log(keyState);
+        })
+
+        window.addEventListener("keyup", (event) => {
+            const key = event.keyCode
+
+            // 키를 떼었을 때 
+            if (key == 37) {
+                keyState[37] = false;
+            } else if (key == 39) {
+                keyState[39] = false;
+            }
+
+            console.log(keyState);
+        })
+
+
+
+
+
+
+
+
+
+        // console.log(Object.entries(keyState)[0]);
+        // console.log(Object.values(keyState));
+    </script>
+</body>
+
+</html>

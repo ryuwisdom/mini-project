@@ -46,35 +46,83 @@
     </div>
 
     <script>
-        const canvas = document.getElementById("myCanvas");
+        // id가 myCanvas인 태그를 canvas로 정의함
+        const canvas = document.getElementById("myCanvas");  
+
+        // canvas 공간에 2d로 canvas를 그리는데 그공간 이름을 ctx로 지정 
         const ctx = canvas.getContext("2d");
 
 
 
 
-        // 1초마다 y축이 1씩 증가힌다. 
+        // 이동할때 마다 5씩 증감
+        let direction1 = 1;
+        let direction2= 1;
+        let speed = 2;
+        
+        // 가로(x)는 485에 위치
 
-        let direction = 13;
-        let y = 100
+        // x는 값이 변하지않아야되고 y만 움직여야 상하로 공이 튕긴다
+        let x = 250;
+        // 세로(y)는 200에 위치
+        let y = 250;
+
+        // 0.1초마다 setInterval안의 함수가 실행
         setInterval(function () {
 
-            // canvas 지우기
+            // ctx에 그려지는 canvas를 삭제한다.
             ctx.clearRect(0, 0, 500, 500);
 
 
-                // canvas 다시그리기 
-                ctx.beginPath();
-                ctx.arc(100, y, 10, 0, Math.PI * 2, false);
-                ctx.fillStyle = "yellowGreen";
-                ctx.fill();
-                ctx.closePath();
+            // ctx에 canvas가 그려진다.
+            ctx.beginPath();
 
-                y = y + direction;
+            // ctx에 위치는 x(485),y(200)축에 반지름이 10인 원이 그려진다.
+            ctx.arc(x, y, 10, 0, Math.PI * 2, false);
+
+            // 원의 색상은 yellowGreen로 선정되고
+            ctx.fillStyle = "yellowGreen";
+
+            // 색이 채워진다.
+            ctx.fill();
+
+            // canvas 그려짐이 멈춘다.
+            ctx.closePath();
+
+            
+            // 세로(y)의 위치는 기존위치 + direction(5)
+            y = y + direction2 * speed;
+             // 가로(x)의 위치는 기존위치 + direction(5)
+            x = x + direction1 * speed;
 
 
-                if(y >=490) direction = -13;
-                if(y  <10) direction = +13;
-                // if(y == 500 )
+            console.log(x, y);
+
+            // 485 200 1회전
+            // 490 205
+            // 485 200
+
+            // 485 200 1회전
+            // 490 205
+            // 485 210
+            // 490 215
+            // 485 210
+            // 490 215
+
+        
+
+            // 가로(x)가 가로 canvas끝에 닿을때 direction는 -로 변하고  x = x - direction;가 된다.
+            if (x >= 490 || x <10) direction1 = -direction1;
+            if (y >= 490 || y <10) direction2 = -direction2;
+
+            
+            
+
+
+
+     
+
+            
 
         }, 10)
     </script>
