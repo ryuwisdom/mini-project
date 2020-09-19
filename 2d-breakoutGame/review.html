@@ -58,6 +58,7 @@
         let barWidth = 100;
         let barHeight = 14;
         let barSpeed = 15;
+        const leftWall = 1;
 
 
 
@@ -70,14 +71,15 @@
             if (keyState[37]) {
                 // Bar position
 
-                if (barXPosition  <= directionX) {
+                // 충돌 조건에 충족했을 때
+                if (barXPosition >= leftWall) {
                    //아무것도 하지 않는다.(이동안함)
-                   barXPosition = barXPosition + barSpeed;
-                  
+                //    barXPosition = barXPosition
+                //    barXPosition = barXPosition + barSpeed;                  
+                barXPosition = barXPosition - barSpeed;
                 }
 
                 // 왼쪽키를 눌렀을때 bar의 현재 위치는 현재위치 - bar의 속도값으로 이동
-                barXPosition = barXPosition - barSpeed;
 
             }
 
@@ -85,13 +87,14 @@
             if (keyState[39]) {
                 // Bar position
 
-                if(barXPosition>canvasWidth-barWidth){
+                if(barXPosition<canvasWidth-barWidth){
                     //아무것도 하지 않는다.
-                    barXPosition = barXPosition - barSpeed;
-                    console.log(barXPosition);
+                    // barXPosition = barXPosition - barSpeed;
+                    // barXPosition = canvasWidth-barWidth
+                    // console.log(barXPosition);
 
+                    barXPosition = barXPosition + barSpeed;
                 }
-                barXPosition = barXPosition + barSpeed;
             }
 
             // bar collision process
