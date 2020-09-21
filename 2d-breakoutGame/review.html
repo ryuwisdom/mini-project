@@ -42,6 +42,7 @@
         const canvas = document.getElementById("myCanvas");
         const ctx = canvas.getContext("2d");
         const bar = canvas.getContext("2d");
+        const brick = canvas.getContext("2d");
 
         let directionX = 1;
         let directionY = 1;
@@ -60,6 +61,44 @@
         let barSpeed = 15;
         const leftWall = 1;
 
+        // block Object
+        let block = function (blockXPosition, blockYPosition, width, height, color) {
+            this.height = height;
+            this.width = width;
+            this.blockXPosition = blockXPosition;
+            this.blockYPosition = blockYPosition;
+            this.color = color;
+
+
+            this.draw = function () {
+                // console.log("+_+");
+                brick.beginPath();
+                brick.rect(this.blockXPosition, this.blockYPosition, this.width, this.height);
+                brick.fillStyle = this.color;
+                brick.fill();
+                brick.closePath();
+
+            };
+
+        };
+
+
+
+        const blocks = [];
+
+        let blockCount = 6;
+        let moveBrick = 115;
+
+
+        for (let i = 0; i < blockCount; i++) {
+            let block1 = new block(12.5 + moveBrick * i, 15, 100, 20, "deepPink");
+            blocks.push(block1)
+
+        }
+
+        console.log(blocks);
+        // console.log(block1);
+
 
 
 
@@ -69,41 +108,35 @@
 
             // key check
             if (keyState[37]) {
-                // Bar position
 
-                // 충돌 조건에 충족했을 때
+                // bar collision process
+                // 충돌하지 않을때
                 if (barXPosition >= leftWall) {
-                   //아무것도 하지 않는다.(이동안함)
-                //    barXPosition = barXPosition
-                //    barXPosition = barXPosition + barSpeed;                  
-                barXPosition = barXPosition - barSpeed;
+
+                    // Bar position
+                    // 이동
+                    barXPosition = barXPosition - barSpeed;
                 }
 
-                // 왼쪽키를 눌렀을때 bar의 현재 위치는 현재위치 - bar의 속도값으로 이동
 
             }
 
 
             if (keyState[39]) {
-                // Bar position
 
-                if(barXPosition<canvasWidth-barWidth){
-                    //아무것도 하지 않는다.
-                    // barXPosition = barXPosition - barSpeed;
-                    // barXPosition = canvasWidth-barWidth
-                    // console.log(barXPosition);
+                if (barXPosition < canvasWidth - barWidth) {
+
 
                     barXPosition = barXPosition + barSpeed;
                 }
             }
 
-            // bar collision process
-
-            // 움직인 후의 위치(예측)가 directionX(1)
-            // if (barXPosition - barSpeed >= barXPosition) barXPosition = barXPosition + barSpeed;
-            // if (barXPosition + barSpeed >= canvasWidth-barWidth) barXPosition = barXPosition - barSpeed;
-
-
+            // bar & ball collision process
+            if (ballYPosition + ballSize >= barYPosition && (ballXPosition >= barXPosition && ballXPosition <=
+                    barXPosition + barWidth)) {
+                directionY = -directionY;
+                console.log("boom!");
+            }
 
 
             // reset drawing
@@ -124,6 +157,35 @@
             bar.fill();
             bar.closePath();
 
+      
+            blocks.forEach((v,index)=> {
+                // let index = 0;
+                // rect1 ball x: ballXPosition
+                // rect2 block y : blockXPosition
+
+                // console.log(v);
+
+                if (ballXPosition < v.blockXPosition + v.width &&
+                    ballXPosition + ballSize > v.blockXPosition &&
+                    ballYPosition < v.blockYPosition + v.height &&
+                    ballYPosition + ballSize > v.blockYPosition) {
+                    // collision detected!
+
+                    console.log("충돌충돌 !!!");
+
+                 
+                    // 현재 충돌하는 v의 인덱스
+                    console.log(index);
+                 
+                }
+
+
+            });
+
+            // draw block
+            blocks.forEach(singleBlock => {
+                singleBlock.draw()
+            });
 
 
             // ball position
@@ -171,17 +233,6 @@
 
             console.log(keyState);
         })
-
-
-
-
-
-
-
-
-
-        // console.log(Object.entries(keyState)[0]);
-        // console.log(Object.values(keyState));
     </script>
 </body>
 
