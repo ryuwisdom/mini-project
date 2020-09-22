@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Grandstander:wght@300&display=swap');
         * {
             padding: 0;
             margin: 0;
@@ -36,6 +37,7 @@
 <body>
 
     <div class="canvas-container">
+        <!-- <img src="./bear.png" alt="bear"> -->
         <canvas id="myCanvas" width="700" height="500"></canvas>
     </div>
     <script>
@@ -43,17 +45,18 @@
         const ctx = canvas.getContext("2d");
         const bar = canvas.getContext("2d");
         const brick = canvas.getContext("2d");
+        const text = canvas.getContext("2d");
+        const image = canvas.getContext("2d");
 
         let directionX = 1;
         let directionY = 1;
-        let speed = 4;
+        let speed = 3;
         let ballSize = 12;
         const canvasWidth = 700;
         const canvasHeight = 500;
 
-        let ballXPosition = 10;
-        let ballYPosition = 10;
-
+        let ballXPosition = 250;
+        let ballYPosition = 140;
         let barXPosition = 1;
         let barYPosition = canvasHeight - 25;
         let barWidth = 100;
@@ -61,11 +64,13 @@
         let barSpeed = 15;
         const leftWall = 1;
 
+        // 각 SCENE 구분을 위한 상수 선언 
         const STARTING_SCENE = 0;
         const PLAYING_SCENE = 1;
-        const ENDING_SCENE = 2;
+        const CLEARING_SCENE = 2;
+        const ENDING_SCENE = 3;
 
-        let scene = PLAYING_SCENE;
+        let scene = STARTING_SCENE;
 
 
 
@@ -98,25 +103,44 @@
         let moveBrick = 115;
 
 
-        for (let i = 0; i < blockCount; i++) {
-            let block1 = new block(12.5 + moveBrick * i, 100, 100, 20, "deepPink");
+        for (let i = 0; i < 24; i++) {
+
+            console.log(Math.floor(i / blockCount));
+
+            let block1 = new block(12.5 + moveBrick * (i % 6), 15 + 30 * Math.floor(i / blockCount) + 1, 100, 20, "deepPink");
             blocks.push(block1)
-
         }
+        // for (let i = 0; i < blockCount; i++) {
+        //     let block1 = new block(12.5 + moveBrick * i, 50, 100, 20, "deepPink");
+        //     blocks.push(block1)
+        // }
+        // for (let i = 0; i < blockCount; i++) {
+        //     let block1 = new block(12.5 + moveBrick * i, 80, 100, 20, "deepPink");
+        //     blocks.push(block1)
+        // }
 
-        console.log(blocks);
+        // console.log(blocks);
         // console.log(block1);
 
-
+        // image info
+        const bear = new Image();
+            bear.src = './bear.png';
 
 
         setInterval(() => {
 
-
+            // reset drawing
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight)
 
             switch (scene) {
                 case STARTING_SCENE:
+                    text.font = "55px 'Grandstander', cursive"
+                    text.fillText("2D brick breaker", 150, 100);
+
+                    scene = PLAYING_SCENE;
+
                     break;
+
                 case PLAYING_SCENE:
 
 
@@ -155,9 +179,6 @@
                         console.log("boom!");
                     }
 
-
-                    // reset drawing
-                    ctx.clearRect(0, 0, canvasWidth, canvasHeight)
 
                     // draw process
 
@@ -215,6 +236,7 @@
                         directionX = -directionX;
                     };
 
+                    // 위의 벽에 닿았을 땐 튕김
                     if (ballYPosition < ballSize) {
                         directionY = -directionY
 
@@ -223,18 +245,30 @@
 
                     };
 
-                     if (canvasHeight - ballSize <= ballYPosition ) {
-                         scene = ENDING_SCENE;
-                     }
+                    if (canvasHeight - ballSize <= ballYPosition) {
+                        scene = ENDING_SCENE;
 
 
-
+                    }
 
 
                     break;
 
+                case CLEARING_SCENE:
+
+                    // block을 다 충돌했을때
+                    text.font = "55px 'Grandstander', cursive"
+                    text.fillText("Congratulations", 350, 350);
+                    // 
+                    break;
+
                 case ENDING_SCENE:
 
+                    text.font = "55px 'Grandstander', cursive"
+                    text.fillText("Game Over", 350, 350);
+                    image.drawImage(bear, 50, 80, 250, 400)
+
+                 
                 default:
                     break;
             }
