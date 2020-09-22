@@ -51,8 +51,8 @@
         const canvasWidth = 700;
         const canvasHeight = 500;
 
-        let ballXPosition = 300;
-        let ballYPosition = 180;
+        let ballXPosition = 10;
+        let ballYPosition = 10;
 
         let barXPosition = 1;
         let barYPosition = canvasHeight - 25;
@@ -60,6 +60,14 @@
         let barHeight = 14;
         let barSpeed = 15;
         const leftWall = 1;
+
+        const STARTING_SCENE = 0;
+        const PLAYING_SCENE = 1;
+        const ENDING_SCENE = 2;
+
+        let scene = PLAYING_SCENE;
+
+
 
         // block Object
         let block = function (blockXPosition, blockYPosition, width, height, color) {
@@ -91,7 +99,7 @@
 
 
         for (let i = 0; i < blockCount; i++) {
-            let block1 = new block(12.5 + moveBrick * i, 15, 100, 20, "deepPink");
+            let block1 = new block(12.5 + moveBrick * i, 100, 100, 20, "deepPink");
             blocks.push(block1)
 
         }
@@ -104,97 +112,132 @@
 
         setInterval(() => {
 
-            // Bar process
-
-            // key check
-            if (keyState[37]) {
-
-                // bar collision process
-                // 충돌하지 않을때
-                if (barXPosition >= leftWall) {
-
-                    // Bar position
-                    // 이동
-                    barXPosition = barXPosition - barSpeed;
-                }
 
 
+            switch (scene) {
+                case STARTING_SCENE:
+                    break;
+                case PLAYING_SCENE:
+
+
+                    // Bar process
+
+                    // key check
+                    if (keyState[37]) {
+
+                        // bar collision process
+                        // 충돌하지 않을때
+                        if (barXPosition >= leftWall) {
+
+                            // Bar position
+                            // 이동
+                            barXPosition = barXPosition - barSpeed;
+                        }
+
+
+                    }
+
+
+                    if (keyState[39]) {
+
+                        if (barXPosition < canvasWidth - barWidth) {
+
+
+                            barXPosition = barXPosition + barSpeed;
+                        }
+                    }
+
+                    // bar & ball collision process
+                    if (ballYPosition + ballSize >= barYPosition && (ballXPosition >= barXPosition &&
+                            ballXPosition <=
+                            barXPosition + barWidth)) {
+                        directionY = -directionY;
+                        console.log("boom!");
+                    }
+
+
+                    // reset drawing
+                    ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+
+                    // draw process
+
+                    // draw a ball
+                    ctx.beginPath();
+                    ctx.arc(ballXPosition, ballYPosition, ballSize, 0, Math.PI * 2, false);
+                    ctx.fillStyle = "navy";
+                    ctx.fill();
+                    ctx.closePath();
+
+                    // draw a bar
+                    bar.rect(barXPosition, barYPosition, barWidth, barHeight);
+                    bar.fillStyle = "deepPink";
+                    bar.fill();
+                    bar.closePath();
+
+
+                    blocks.forEach((v, index) => {
+
+                        // rect1 ball x: ballXPosition
+                        // rect2 block y : blockXPosition
+
+
+                        if (ballXPosition < v.blockXPosition + v.width &&
+                            ballXPosition + ballSize > v.blockXPosition &&
+                            ballYPosition < v.blockYPosition + v.height &&
+                            ballYPosition + ballSize > v.blockYPosition) {
+                            // collision detected!
+
+
+                            // 충돌하는 인덱스 삭제
+                            delete blocks[index]
+
+                            // 충돌했을 때 directionY  direction 변경
+                            directionY = -directionY
+
+
+                        }
+
+
+                    });
+
+                    // draw block
+                    blocks.forEach(singleBlock => {
+                        singleBlock.draw()
+                    });
+
+
+                    // ball position
+                    ballXPosition = ballXPosition + directionX * speed;
+                    ballYPosition = ballYPosition + directionY * speed;
+
+                    // collision process
+                    if (canvasWidth - ballSize <= ballXPosition || ballXPosition < ballSize) {
+                        directionX = -directionX;
+                    };
+
+                    if (ballYPosition < ballSize) {
+                        directionY = -directionY
+
+                        // 바닥에 닿았을때 play 종료 
+                        // console.log("died");
+
+                    };
+
+                     if (canvasHeight - ballSize <= ballYPosition ) {
+                         scene = ENDING_SCENE;
+                     }
+
+
+
+
+
+                    break;
+
+                case ENDING_SCENE:
+
+                default:
+                    break;
             }
-
-
-            if (keyState[39]) {
-
-                if (barXPosition < canvasWidth - barWidth) {
-
-
-                    barXPosition = barXPosition + barSpeed;
-                }
-            }
-
-            // bar & ball collision process
-            if (ballYPosition + ballSize >= barYPosition && (ballXPosition >= barXPosition && ballXPosition <=
-                    barXPosition + barWidth)) {
-                directionY = -directionY;
-                console.log("boom!");
-            }
-
-
-            // reset drawing
-            ctx.clearRect(0, 0, canvasWidth, canvasHeight)
-
-            // draw process
-
-            // draw a ball
-            ctx.beginPath();
-            ctx.arc(ballXPosition, ballYPosition, ballSize, 0, Math.PI * 2, false);
-            ctx.fillStyle = "navy";
-            ctx.fill();
-            ctx.closePath();
-
-            // draw a bar
-            bar.rect(barXPosition, barYPosition, barWidth, barHeight);
-            bar.fillStyle = "deepPink";
-            bar.fill();
-            bar.closePath();
-
-      
-            blocks.forEach((v,index)=> {
-                // let index = 0;
-                // rect1 ball x: ballXPosition
-                // rect2 block y : blockXPosition
-
-                // console.log(v);
-
-                if (ballXPosition < v.blockXPosition + v.width &&
-                    ballXPosition + ballSize > v.blockXPosition &&
-                    ballYPosition < v.blockYPosition + v.height &&
-                    ballYPosition + ballSize > v.blockYPosition) {
-                    // collision detected!
-
-                    console.log("충돌충돌 !!!");
-
-                 
-                    // 현재 충돌하는 v의 인덱스
-                    console.log(index);
-                 
-                }
-
-
-            });
-
-            // draw block
-            blocks.forEach(singleBlock => {
-                singleBlock.draw()
-            });
-
-
-            // ball position
-            ballXPosition = ballXPosition + directionX * speed;
-            ballYPosition = ballYPosition + directionY * speed;
-
-            // collision process
-            if (canvasWidth - ballSize <= ballXPosition || ballXPosition < ballSize) directionX = -directionX;
-            if (canvasHeight - ballSize <= ballYPosition || ballYPosition < ballSize) directionY = -directionY;
 
 
         }, 1000 / 60)
