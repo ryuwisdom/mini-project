@@ -7,6 +7,7 @@
     <title>Document</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Grandstander:wght@300&display=swap');
+
         * {
             padding: 0;
             margin: 0;
@@ -50,7 +51,7 @@
 
         let directionX = 1;
         let directionY = 1;
-        let speed = 3;
+        let speed = 4;
         let ballSize = 12;
         const canvasWidth = 700;
         const canvasHeight = 500;
@@ -59,16 +60,31 @@
         let ballYPosition = 140;
         let barXPosition = 1;
         let barYPosition = canvasHeight - 25;
-        let barWidth = 100;
+        let barWidth = 300;
         let barHeight = 14;
         let barSpeed = 15;
         const leftWall = 1;
+
+        let brickInLine = 6;
+        let totalBrick = 6;
+        let brickDistance = 115;
+
+        let brickWidth = 100;
+        let brickHeight = 20;
+
+
+        // score
+        let stage = 1;
+
+
 
         // 각 SCENE 구분을 위한 상수 선언 
         const STARTING_SCENE = 0;
         const PLAYING_SCENE = 1;
         const CLEARING_SCENE = 2;
         const ENDING_SCENE = 3;
+
+
 
         let scene = STARTING_SCENE;
 
@@ -99,15 +115,15 @@
 
         const blocks = [];
 
-        let blockCount = 6;
-        let moveBrick = 115;
 
 
-        for (let i = 0; i < 24; i++) {
 
-            console.log(Math.floor(i / blockCount));
+        for (let i = 0; i < totalBrick; i++) {
 
-            let block1 = new block(12.5 + moveBrick * (i % 6), 15 + 30 * Math.floor(i / blockCount) + 1, 100, 20, "deepPink");
+            console.log(Math.floor(i / brickInLine));
+
+            let block1 = new block(12.5 + brickDistance * (i % 6), 25 + 30 * Math.floor(i / brickInLine) + 1, brickWidth, brickHeight,
+                "deepPink");
             blocks.push(block1)
         }
         // for (let i = 0; i < blockCount; i++) {
@@ -124,7 +140,10 @@
 
         // image info
         const bear = new Image();
-            bear.src = './bear.png';
+        bear.src = './bear.png';
+
+        const brickImg = new Image();
+        brickImg.src = './brick.png'
 
 
         setInterval(() => {
@@ -135,13 +154,19 @@
             switch (scene) {
                 case STARTING_SCENE:
                     text.font = "55px 'Grandstander', cursive"
-                    text.fillText("2D brick breaker", 150, 100);
+                    text.fillText("2D brick breaker", 120, 100);
+                    image.drawImage(brickImg, 550, 48, 70, 70)
 
-                    scene = PLAYING_SCENE;
+                    setTimeout(() => {
+                        scene = PLAYING_SCENE;
+
+                    }, 3000);
 
                     break;
 
                 case PLAYING_SCENE:
+
+
 
 
                     // Bar process
@@ -195,6 +220,23 @@
                     bar.fill();
                     bar.closePath();
 
+                    // stage process
+                    ctx.font = "16px 'Grandstander', cursive";
+                    ctx.fillStyle = "navy";
+                    ctx.fillText("Stage: " + stage, 8, 20);
+
+                    // 남은 블럭이 없을때(다 깼을때)
+                    // blocks배열값이 비었을때 
+                    if (blocks.length == 0) {
+                        ++stage;
+
+                        console.log("next stage!");
+                        scene = CLEARING_SCENE
+                    }
+
+
+
+
 
                     blocks.forEach((v, index) => {
 
@@ -210,16 +252,20 @@
 
 
                             // 충돌하는 인덱스 삭제
-                            delete blocks[index]
+                            // delete blocks[index]
+                            blocks.splice(index, 1);
+
 
                             // 충돌했을 때 directionY  direction 변경
                             directionY = -directionY
+
 
 
                         }
 
 
                     });
+
 
                     // draw block
                     blocks.forEach(singleBlock => {
@@ -256,19 +302,33 @@
 
                 case CLEARING_SCENE:
 
-                    // block을 다 충돌했을때
-                    text.font = "55px 'Grandstander', cursive"
-                    text.fillText("Congratulations", 350, 350);
-                    // 
+                    // bar size & speed rearrange
+                    ++speed
+                    barWidth -= 30
+
+                    for (let i = 0; i < totalBrick * stage; i++) {
+
+                        console.log(Math.floor(i / brickInLine));
+
+                        let block1 = new block(12.5 + brickDistance * (i % 6), 25 + 30 * Math.floor(i /
+                            brickInLine) + 1, 100, 20, "deepPink");
+                        blocks.push(block1)
+                    }
+
+                    ballYPosition = (brickHeight + 30) * stage 
+
+                        scene = PLAYING_SCENE
+
+
                     break;
 
                 case ENDING_SCENE:
 
                     text.font = "55px 'Grandstander', cursive"
                     text.fillText("Game Over", 350, 350);
-                    image.drawImage(bear, 50, 80, 250, 400)
+                    image.drawImage(bear, 50, 40, 250, 450)
 
-                 
+
                 default:
                     break;
             }
