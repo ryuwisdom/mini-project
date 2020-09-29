@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock</title>
+</head>
+    <style>
+       * {
+            margin: 0;
+            padding: 0;
+         
+        }
+        html {
+            height: 100%;
+
+        }
+
+        body {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* text-align: center; */
+        }
+    </style>
+<body>
+
+   <div class="hour"></div><p>:</p><div class="min"></div><p>:</p><div class="sec"></div>
+
+    <script>
+        const hour = document.getElementsByClassName("hour")[0]
+        const min = document.getElementsByClassName("min")[0]
+        const sec = document.getElementsByClassName("sec")[0]
+
+        const rightNow = setInterval(clock, 1000);
+        
+        function clock () {
+            const today = new Date();
+     
+                hour.innerHTML = today.getHours()
+                min.innerHTML = today.getMinutes()
+                sec.innerHTML = today.getSeconds()
+        }
+          
+    </script>
+</body>
+</html>
