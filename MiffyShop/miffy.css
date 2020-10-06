@@ -2,55 +2,72 @@
 
 @font-face {font-family: "Helvetica Rounded"; src: url("//db.onlinewebfonts.com/t/22f7211901f8339f9435e67eea82cf99.eot"); src: url("//db.onlinewebfonts.com/t/22f7211901f8339f9435e67eea82cf99.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/22f7211901f8339f9435e67eea82cf99.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/22f7211901f8339f9435e67eea82cf99.woff") format("woff"), url("//db.onlinewebfonts.com/t/22f7211901f8339f9435e67eea82cf99.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/22f7211901f8339f9435e67eea82cf99.svg#Helvetica Rounded") format("svg"); }
 *{
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     margin: 0;
     padding: 0;
     list-style: none;
     text-decoration: none;
     font-family: "Helvetica Rounded"
 
-    
-
 }
 
-/* 임시 이미지 사이즈 조정 */
-/* img {width: 90px;
 
-} */
 
-html, body {
+ html, body {
     width: 100%;
-    height: 100vh;
+    height: 2000px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
 }
 
 header {
     width: 100%;
     height: 160px;
-    background-color: blanchedalmond;
-    
-    
+    /* position: fixed; */
     display: flex;
-    position: fixed;
+    justify-content: center;
+    box-shadow: 0px 0px 1rem rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    background-color: white;
+    /* z-index: 4; */
+    /* background-color: white; */
 
+}
+
+.header-container{
+    width: 80%;
+    height: 100%;
+    /* background-color: blanchedalmond; */
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
 }
 
 nav {
     width: 100%;
-    height: 10rem;
-    display: block;
-    box-shadow: 0px 0px 1rem rgba(0, 0, 0, 0.7);
-    position: sticky;
-    top: 0;
-    /* flex-direction: column; */
-    /* align-items: center; */
-    /* align-content: flex-end; */
+    height: 100%;
+    /* display: block; */
+    /* box-shadow: 0px 0px 1rem rgba(0, 0, 0, 0.1); */
 
-    
+    display: flex;
+    justify-content: center;
+    /* z-index: 3; */
+
 }
 
 .header-text {
     width: 100%;
-    
+    /* height: 100%; */
     display: flex;
     justify-content: flex-end;
     color: black;
@@ -60,52 +77,153 @@ nav {
 .menu-group {
     width: 70%;
     height: 67px;
-    border: tomato solid 1px;
+    /* border: tomato solid 1px; */
     display: flex;
-
-    /* justify-content: flex-end; */
+    /* padding: 10px; */
+    padding-top: 10px;
+    justify-content: flex-end;
     align-items: flex-end;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    /* align-content: flex-end; */
+
 }
 
 .header-text li {
-    width: 100%;
     height: 4rem;
     font-size: 1.2rem;
     display: flex;
     justify-content: center;
-    border: 1px blue solid;
+    align-items: center;
+    /* border: 1px blue solid; */
+   
+    padding: 0 10px;
+    /* text-align: center; */
 }
 
 .header-text li a {
+    height: 30px;
+    /* width: 100px; */
     color: black;
+    cursor: pointer;
 }
 
 .logo-img {
     position: absolute;
     display: flex;
+    z-index: 3;
    
 }
 
-.logo-img :nth-child(1) {
-    bottom: -3.5rem;
+
+#img-logo {
+   
+    top: 10px;
     left: .5rem;
     position: absolute;
     width: 7rem;
+    cursor: pointer;
+    transition: all .8s ease-in-out;
+   
 }
 
-.logo-img :nth-child(2) {
-    top: 20px;
-    left: 130px;
+
+.miffy-visiable {
+    transform: translateY(0px);
+}
+
+
+.miffy-invisiable {
+    transform: translateY(180px);
+} 
+
+.logo-img img:nth-child(2) {
+    width: 200px;
+    display: block;
     position: absolute;
-    height: 17.6px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 90px;
+    left: 8rem;
+    padding: 10px 0;
+    transition: all 300ms;
+    cursor: pointer;
 }
 
 .menu-img {
     position: absolute;
-    top: 1.6rem;
+    top: 1.2rem;
     right: .4rem;
 }
 
 .menu-img img {
     width: 4.5rem;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+
+    /* background-color: yellow; */
+    /* background: white; */
+}
+
+.main-banner {
+    box-sizing: content-box;
+    width: 100%;
+    background-image: url(./images/main-banner-background.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+
+}
+
+.main-banner-text {
+    
+    opacity: 1;
+    display: block;
+    width: 55%;
+    padding: 8.6% 0;
+    position: relative;
+    left: 6.6%;
+    text-align: left;
+    line-height: 1.1;
+    }
+
+.text {
+    width: 100%;
+    position: relative;
+    display: block;
+    font-size: 5.5rem;
+    /* z-index: 10; */
+}
+.shop-btn {
+    width: auto;
+    margin: 0;
+    margin-top: 1rem;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    padding: 8px 40px;
+    font-size: 2.3rem;
+    background-color: #ffe88d;
+    border: none;
+    border-radius: 8px;
+    font-weight: normal;
+    vertical-align: middle;
+}
+.banner-img {
+    position: absolute;
+    width: 75%;
+    right: 0;
+    bottom: 0;
+    
+}
+
+.banner-img img {
+    max-width: 100%;
+   
+  
 }
