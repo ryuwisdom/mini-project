@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top nav-bar dropdown</title>
+    <link href="//db.onlinewebfonts.com/c/22f7211901f8339f9435e67eea82cf99?family=Helvetica+Rounded" rel="stylesheet"
+        type="text/css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+
+
+
+</head>
+<style>
+    @import url(//db.onlinewebfonts.com/c/22f7211901f8339f9435e67eea82cf99?family=Helvetica+Rounded);
+
+    @font-face {
+        font-family: "Helvetica Rounded";
+        src: url("//db.onlinewebfonts.com/t/22f7211901f8339f9435e67eea82cf99.eot");
+        src: url("//db.onlinewebfonts.com/t/22f7211901f8339f9435e67eea82cf99.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/22f7211901f8339f9435e67eea82cf99.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/22f7211901f8339f9435e67eea82cf99.woff") format("woff"), url("//db.onlinewebfonts.com/t/22f7211901f8339f9435e67eea82cf99.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/22f7211901f8339f9435e67eea82cf99.svg#Helvetica Rounded") format("svg");
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        list-style: none;
+        color: black;
+        font-family: "Helvetica Rounded"
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 2000PX;
+    }
+
+    .main-wrapper {
+        width: 100%;
+        height: 100%;
+        /* background: rgb(209, 198, 181); */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    header {    height: 10rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background: white;
+    position: sticky;
+top: 0;
+left: 0;
+z-index: 10;}
+
+    .header-container {
+        height: 10rem;
+        width: 80%;
+        background: white;
+        display: flex;
+        overflow: hidden;
+
+    }
+
+    .logo-site {
+        width: 40%;
+        height: 100%;
+        display: flex;
+    }
+
+    .logo-img img {
+
+        width: 7rem;
+        padding-left: 10px;
+        /* position: absolute; */
+        transform: translateY(20px);
+    }
+
+    .logo-text-img img {
+        width: 200px;
+        position: absolute;
+        top: 110px;
+        /* left: 5px; */
+    }
+
+    .menu-wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        text-align: center;
+        position: relative;
+    }
+
+    .menu-site {
+        width: 100%;
+        display: flex;
+        /* justify-content: flex-end; */
+        /* border: 1px solid yellowgreen; */
+    }
+
+    .menu-site ul {
+        height: 64px;
+        width: 100%;
+        display: flex;
+        /* padding: 5px; */
+        line-height: 64px;
+        justify-content: flex-end;
+        /* align-items: center; */
+
+    }
+
+    .menu-site ul li {
+        height: 100%;
+        width: auto;
+        /* background-color: thistle; */
+        justify-content: flex-end;
+        align-items: flex-end;
+        padding-left: 40px;
+        font-size: 1.2rem;
+        /* text-align: right; */
+    }
+
+    .menu-site ul li a {
+        width: auto;
+        align-items: center;
+        /* background-color: tomato; */
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .sun-site img {
+        width: 4.5rem;
+        position: absolute;
+        top: 10px;
+        right: 5px;
+    }
+
+    main {
+        box-sizing: content-box;
+        width: 100%;
+        height: 100%;
+        display: block;
+      
+
+    }
+
+    .main-container {
+        width: 100%;
+        height: 100%;
+    }
+    .main-banner-background {
+        width: 100%;
+        background-image: url(./images/main-banner-background.webp);
+        background-position: center;
+        background-size:contain;
+        background-repeat: no-repeat;
+        /* z-index: -1; */
+    }
+</style>
+
+<body>
+    <div class="main-wrapper">
+        <header>
+
+    
+        <div class="header-container">
+            <div class="logo-site">
+                <div class="logo-img">
+                    <img src="./images/logo.png" alt="">
+                </div>
+                <div class="logo-text-img">
+                    <img src="./images/text-logo.webp" alt="">
+                </div>
+
+
+            </div>
+            <div class="menu-wrapper">
+
+                <div class="sun-site">
+                    <img src="./images/sun.webp" alt="">
+                </div>
+                <div class="menu-site">
+                    <ul>
+                        <li><a href="#"> personalised&nbsp;<i class="fas fa-caret-down"></i></a>
+                        
+                        <ul>
+                            <li>you can do it</li>
+                        </ul>    
+                    </li>
+                        <li><a href="#"> everything miffy&nbsp;<i class="fas fa-caret-down"></i></a></li>
+                        <li><a href="#"> news</a></li>
+                        <li><a href="#"><i class="fas fa-search"></i>&nbsp;search</a></li>
+                        <li><a href="#"><i class="fas fa-shopping-bag"></i>&nbsp;cart</a></li>
+                    </ul>
+
+                </div>
+            </div>
+
+
+        </div>
+    </header>
+    <main>
+        <div class="main-container">
+            <div class="main-banner-background">
+
+            </div>
+        </div>
+    </main>
+
+    </div>
+</body>
+
+</html>
