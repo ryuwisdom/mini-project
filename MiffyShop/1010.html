@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        list-style: none;
+    }
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+    }
+    .container {
+         display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 500px;
+        height: 500px;
+        border: 1px solid;
+        position: relative;
+    }
+    .rectangular {
+        width: 280px;
+        height: 200px;
+        background-color: tomato;
+        overflow: hidden;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    #rectangular-2 {
+        width: 700px;
+        height: 150px;
+        display: flex;
+        transition: .8s;
+        background: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
+    }
+
+    .button {
+        width: 100%;
+        height: 50px;
+        /* border:1px solid steelblue; */
+        display: flex;
+        justify-content: space-between;
+        /* align-items: center; */
+        position: absolute;
+        /* top: 45%; */
+
+    }
+
+ 
+    #prev-btn, #next-btn {
+        width: 50px;
+        height: 50px;
+        background-color: thistle;
+        border-radius: 50%;
+        line-height: 50px;
+        text-align: center;
+        font-weight: bold;
+        margin: 0 30px;
+    }
+
+    a {
+        color: white;
+    }
+
+    #rectangular-2 ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #rectangular-2 li {
+        width:120px;
+        height: 120px;
+        background: violet;
+        margin: 0 10px;
+        }
+
+    #rectangular-2 li a {
+        text-align: center;
+        font-size: 3rem;
+        line-height: 120px;
+        margin:  0 auto;
+    }
+</style>
+
+
+<body>
+    <div class="container">
+
+        <div class="button">
+            <div id="prev-btn"><a href="#"><</a></div>
+            <div id="next-btn"><a href="#">></a></div>
+        </div>
+        <div class="rectangular">
+            <div id="rectangular-2">
+                <ul>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">6</a></li>
+                    <li><a href="#">7</a></li>
+                    <li><a href="#">8</a></li>
+                    <li><a href="#">9</a></li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <script>
+        const movingbox = document.getElementById('rectangular-2');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        let position = 0;
+        let direction = 1;
+
+        function playslide() {
+            position = position + (direction * 140);
+            // 0.1초마다 왼쪽으로 1px씩 이동
+            movingbox.style.transform = `translateX(${position}px)`
+            
+        }
+       
+      function movingDirection (e){
+        if(e.target == prevBtn){
+            console.log("+_+");
+            direction = 1;
+            playslide()
+        }
+
+        if(e.target == nextBtn){
+            console.log("0_o");
+            direction = -1;
+            playslide()
+        }
+      }
+
+      prevBtn.addEventListener("click",movingDirection)
+      nextBtn.addEventListener("click",movingDirection)
+
+
+    </script>
+</body>
+
+</html>
